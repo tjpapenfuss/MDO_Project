@@ -9,3 +9,13 @@ To download Python3:
 
 Add VSCode Python extension, if you have questions: https://code.visualstudio.com/docs/python/python-tutorial#_macos
 
+
+For the context of this work. The professors recommend
+1. This article for comparing optimization methods: http://ab-initio.mit.edu/wiki/index.php/NLopt_Algorithms
+2. This is autograd...not sure at this point if this has relevance: https://autograd.readthedocs.io/en/latest/ and also autodiff: https://www.autodiff.org/?module=Introduction 
+    a. Autograd appears to be a computation engine. See here for usage: https://autograd.readthedocs.io/en/latest/usage.html
+    b. autodiff is a differentiation software. It will obtain derivatives for users. 
+
+Below I will talk a bit about NLopt:
+First to install: pip install nlopt
+
