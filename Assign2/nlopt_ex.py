@@ -18,7 +18,7 @@ opt.set_min_objective(myfunc)
 opt.add_inequality_constraint(lambda x,grad: myconstraint(x,grad,2,0), 1e-8)
 opt.add_inequality_constraint(lambda x,grad: myconstraint(x,grad,-1,1), 1e-8)
 opt.set_xtol_rel(1e-4)
-x = opt.optimize([1.234, 5.678])
+x = opt.optimize([1.234, 5.678])  #we think that this is the starting point
 minf = opt.last_optimum_value()
 
 # Below are some print statements:
