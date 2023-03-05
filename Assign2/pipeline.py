@@ -59,11 +59,11 @@ temp_source = 272
 
 
 ##This section performs calculations based on parameters and inputs
-vel = mass_dot / (rho * math.pi * ((pipe_diameter / 2) ^ 2))
+vel = mass_dot / (rho * math.pi * ((pipe_diameter / 2) ** 2))
 
 reynolds_number = 1488*rho*vel*pipe_diameter / u_w
 
-fanning = 1/((-4*math.log10(0.2698*(k/pipe_diameter)-5.0452/reynolds_number*math.log10(.3539*(k/pipe_diameter)^1.1098+5.8506/(reynolds_number)^0.8981)))^2)
+fanning = 1/((-4*math.log10(0.2698*(k/pipe_diameter)-5.0452/reynolds_number*math.log10(.3539*(k/pipe_diameter)**1.1098+5.8506/(reynolds_number)**0.8981)))**2)
 
 #this is technically: press_delta = 2*fanning*rho*vel_avg*pipe_length / (g*pipe_diameter)
 #however, what are we averaging velocities between and what is causing the velocity loss?
