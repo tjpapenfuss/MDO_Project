@@ -23,3 +23,5 @@ I started out with adding a sample file from NLOpt's examples. nlopt_ex.py
 I also have a file nlopt_hwproblem2.py that attempts to solve problem 2 from the homework. 
 
 So far, the homework is proving a bit more difficult than I would have liked. 
+
+Additional update on comments
