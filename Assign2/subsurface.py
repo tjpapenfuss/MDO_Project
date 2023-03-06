@@ -1,8 +1,7 @@
-print('hello thereh')
-#import the vars_mar csv
 from numpy import *
 
-import variables
+import variables as v
 
-print("The value of CO2 ideal gas constant is: " + str(variables.CO2_IDEAL_GAS_CONST))
+print("The value of CO2 ideal gas constant is: " + str(v.CO2_IDEAL_GAS_CONST))
 
+#Step 1 is to calculate the 
