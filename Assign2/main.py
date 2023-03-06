@@ -1,9 +1,34 @@
-import nlopt
-from numpy import *
+# ------------------------------------------------------------------------------------------------------------------ #
+# 16.888 MDO; Multidisciplinary Design Optimization. 
+# Project: Design and optimization of CO2 injection. 
+# Authors: John Beilstein, Warren Anderson, Brooke DiMartino, Stephen Tainter, Tanner Papenfuss
+# Team name: Terra Sparkling
+# ------------------------------------------------------------------------------------------------------------------ #
 
+# ------------------------------------------------------------------------------------------------------------------ #
+# Import all necessary packages
+# ------------------------------------------------------------------------------------------------------------------ #
+from numpy import *
 import variables
+
+# ------------------------------------------------------------------------------------------------------------------ #
+# Import the module files. EX. import subsurface as sub
+# ------------------------------------------------------------------------------------------------------------------ #
+import wells as wells
 
 print("The value of CO2 ideal gas constant is: " + str(variables.CO2_IDEAL_GAS_CONST))
 
-#an algorithm (see NLopt Algorithms for possible values) and the dimensionality of the problem (n, the number of optimization parameters).
-opt = nlopt.opt(nlopt.NLOPT_GN_DIRECT_L, n=1)
+# Chaining together the modules below. 
+
+# ------------------------------------------------------------------------------------------------------------------ #
+# Module name: Wells
+# Required inputs: FILL IN
+# Outputs: FILL IN
+# ------------------------------------------------------------------------------------------------------------------ #
+print("Wells res depth: ", wells.res_depth)
+
+# ------------------------------------------------------------------------------------------------------------------ #
+# Module name: 
+# Required inputs:
+# Outputs: 
+# ------------------------------------------------------------------------------------------------------------------ #
