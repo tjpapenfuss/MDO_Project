@@ -1,12 +1,11 @@
 ##############################################################################################
-# This module 
-
+# This module will perform calculations for pipelines.
+# Inputs: mass_dot, press_source, p_d, p_l, n_pc
+# Outputs: press_i, vel_i, temp_i, cost_pipe
 ##############################################################################################
 
 import math
 import variables
-
-
 
 # function definition
 def pipes_out(mass_dot, press_source, p_d, p_l, n_pc):
