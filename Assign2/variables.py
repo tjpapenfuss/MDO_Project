@@ -8,7 +8,7 @@ rho_CO2sc =             37.5 #Drilling,CO2 fluid density at Super Critcal, lb/ft
 
 # pipeline
 n_pc =                  0 #Pipeline,Number of connections,Number of clients/sources we plan to bring in,50,1,3,diml
-m_dot =                 0 #Pipeline,Mass_flow_rate,CO2 mass flow rate,kg/s
+m_dot =              0.05 #Pipeline,Mass_flow_rate,CO2 mass flow rate,kg/s
 p_d =                   8 #Pipeline,Diameter,Inner diameter of pipe,in
 p_l =               10000 #Pipeline,Length,Length from sales point to facility,ft
 
