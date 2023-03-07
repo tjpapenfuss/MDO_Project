@@ -16,14 +16,28 @@ cost_per_foot =         0 #Pipeline,Cost per foot,Cost for one foot of piping,,,
 cost_per_pc =           0 #Pipeline,Cost per connection,Cost for one source connection,,,,$
 press_source =          0 #Pipeline,Pressure at Source,Pressure at the source,,,,psi
 temp_source =           0 #Pipeline,Temperature at Source,Temperature at the source,,,,deg F
+p1 =                    0 #Pipeline pressure at inlet of facility, psi
+T1 =                    0 #Pipeline temperature at inlet of facility, psi
 
 # facility
 n_comp =                0 #Facility,Number of Compressors,Number of Compressors,diml
 n_hx =                  0 #Facility,Number of Condensers,Number of Condensers,diml
-pou_i_comp =            0 #Facility,Compressor outlet pressure,"Pressure at outlet of each compressor i, up to n_comp",psi
-tou_i_hx =              0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX k, up to n_hx",C
-cp_CO2 =                0 # Facility,CO2 Cp,Specific heat capacity of CO2 at constant pressure,,,0.844,KJ/(kgK)
-cv_CO2 =                0 #Facility,CO2 Cp,Specific heat capacity of CO2 at constant pressure,,,0.655,KJ/(kgK)
+p_ou_12_comp =          0 #Facility,Compressor outlet pressure,"Pressure at outlet of each compressor 12, up to n_comp",psi
+p_ou_34_comp =          0 #Facility,Compressor outlet pressure,"Pressure at outlet of each compressor 34, up to n_comp",psi
+p_ou_56_comp =          0 #Facility,Compressor outlet pressure,"Pressure at outlet of each compressor 56, up to n_comp",psi
+p_ou_78_comp =          0 #Facility,Compressor outlet pressure,"Pressure at outlet of each compressor 78, up to n_comp",psi
+p_ou_910_comp =         0 #Facility,Compressor outlet pressure,"Pressure at outlet of each compressor 910, up to n_comp",psi
+p_ou_1112_comp =        0 #Facility,Compressor outlet pressure,"Pressure at outlet of each compressor 1112, up to n_comp",psi
+p_ou_1314_comp =        0 #Facility,Compressor outlet pressure,"Pressure at outlet of each compressor 1314, up to n_comp",psi
+t_ou_23_hx =            0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 23, up to n_hx",C
+t_ou_45_hx =            0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 45, up to n_hx",C
+t_ou_67_hx =            0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 67, up to n_hx",C
+t_ou_89_hx =            0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 89, up to n_hx",C
+t_ou_1011_hx =          0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 1011, up to n_hx",C
+t_ou_1213_hx =          0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 1213, up to n_hx",C
+t_ou_1415_hx =          0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 1415, up to n_hx",C
+cp_CO2 =            0.844 #Facility,CO2 Cp,Specific heat capacity of CO2 at constant pressure,,,0.844,KJ/(kgK)
+cv_CO2 =            0.655 #Facility,CO2 Cp,Specific heat capacity of CO2 at constant pressure,,,0.655,KJ/(kgK)
 adia_index =            0 #Facility,Adiabatic Index,Ratio of Cp/Cv,,,1.289,diml
 CO2_IDEAL_GAS_CONST =   8.3145 #Facility,CO2 Ideal Gas Constant,Ideal Gas Constant,,,8.3145,J/molK
 CO2_compressability =   0 #Facility,CO2 Compressibility Factor,Compressibility Factor (non-ideal Gas),,,Table,diml
@@ -31,6 +45,24 @@ h_CO2 =                 0 #Facility,CO2 Enthalpy,Internal energy of CO2,,,Table,
 pin_1_comp =            0 #Facility,1st Compressor inlet  Pressure,Pressure at inlet of 1st compressor,1500,10,14.8,psi
 tin_1_comp =            0 #Facility,1st Compressor inlet_Temp,Temp at inlet of 1st compressor,1000,0,25,C
 z_fac =                 0 #Facility,Elevation,"Sea-level, onshore, elevation of facility equipment",0,0,0,ft
+n_poly =             1.33 #polytropic expansion exponent
+M_co2 =             44.01 #g/mol MolasMass CO2
+n_mole =                1 #number of moles of CO2 for ideal gas law
+CO2_emit =            110 #table of emitted CO2 per unit gas combusted; lb/MMBtu
+NG_price =           3.06 #estimate of natural gas price $/MMBTU
+ann_elec =         932212 #average estimated heat exchanger electricity needs for a 1231kW sized HX;
+TX_grid =             941 #2021 average of co2 emitted by the electrical grid in TX; lb/MWh
+comp_capex =       2020.6 #simply grabbed from a paper that showed the estimated capital cost of a compressor; $/(kW)
+hx_capex =         247.35 #simply grabbed from a paper that showed a $300k HX delivered 1231kW of cooling; $/(kW) cooled
+hx_elec =           75.66 #simply grabbed from a paper that showed electrical needs for a certain kW cooler (kWh_elec/kWcooled) per year
+hx_refrig =        0.0097 #simply grabbed from a paper that showed refrigerant needs for a certain kW cooler (kg_refrig/kWcooled) per year
+hx_water =          0.183 #simply grabbed from a paper that showed water needs for a certain kW cooler (m3_water/kWcooled) per year
+hx_elec_price =      0.15 #TX average rate of elec ($/kWh)
+hx_refrig_price =   0.1*3 #simply grabbed from a paper that based off of mexico needs. Tripled cost as a rough est. for usa prices ($/kg)
+hx_water_price =    0.830 #harris county estimated water costs ($/m3)
+comp_om_cost =    0.01108 #simply grabbed from a paper that showed the est o&m non-fuel costs $/kWh
+
+
 
 # subsurface
 por =                   0 # Subsurface,Porosity,Porosity of the reservoir rock we are injecting into,%
