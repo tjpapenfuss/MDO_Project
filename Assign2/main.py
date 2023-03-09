@@ -281,3 +281,4 @@ CAPEX_total, CAPEX_pipeline, CAPEX_site = finance.CAPEX_func(variables.p_l, vari
 OPEX_total = finance.OPEX_func(CAPEX_pipeline, variables.n_wells)
 NPV = finance.NPV_func(CAPEX_total, revenue, CAPEX_site, OPEX_total)
 >>>>>>> main
+# print("Total Annual Operating Expenses $", cost_fac_opex)# print("Total Annual Operating Expenses $", cost_fac_opex)
