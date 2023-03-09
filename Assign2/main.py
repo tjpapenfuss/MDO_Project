@@ -11,7 +11,11 @@
 from numpy import *
 import variables
 import pipeline as pipes
+<<<<<<< HEAD
 import facilities
+=======
+import finance as finance
+>>>>>>> main
 
 # ------------------------------------------------------------------------------------------------------------------ #
 # Import the module files. EX. import subsurface as sub
@@ -50,6 +54,7 @@ print("Pipes temperature output: ", pipes_temp_out)
 print("Pipes cost output: ", pipes_cost_out)
 
 
+<<<<<<< HEAD
 # ------------------------------------------------------------------------------------------------------------------ #
 # Module name: Facilities
 # Required inputs: m_dot, pi, Ti, 
@@ -265,3 +270,14 @@ print ("hx opex: $", hx_opex_1415)
 
 # print("Total Capital Expenses $", cost_fac_capex)
 # print("Total Annual Operating Expenses $", cost_fac_opex)
+=======
+
+#Module name: Finance
+#Required inputs: p_d, p_l, q_inj, n_wells
+#Outputs: NPV
+q_inj=50                #q_inj should be an output of a subsurface function, so delete this once it's available
+revenue = finance.revenue_func(q_inj, variables.n_wells) 
+CAPEX_total, CAPEX_pipeline, CAPEX_site = finance.CAPEX_func(variables.p_l, variables.p_d, variables.n_wells)
+OPEX_total = finance.OPEX_func(CAPEX_pipeline, variables.n_wells)
+NPV = finance.NPV_func(CAPEX_total, revenue, CAPEX_site, OPEX_total)
+>>>>>>> main
