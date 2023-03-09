@@ -27,7 +27,7 @@ print("The value of CO2 ideal gas constant is: " + str(variables.CO2_IDEAL_GAS_C
 # Required inputs: FILL IN
 # Outputs: FILL IN
 # ------------------------------------------------------------------------------------------------------------------ #
-print("Wells res depth: ", wells.res_depth)
+#print("Wells res depth: ", wells.res_depth)
 
 # ------------------------------------------------------------------------------------------------------------------ #
 # Module name: 
