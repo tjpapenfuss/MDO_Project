@@ -14,6 +14,15 @@ import pipeline as pipes
 import finance as finance
 
 # ------------------------------------------------------------------------------------------------------------------ #
+# Import from folders
+# ------------------------------------------------------------------------------------------------------------------ #
+# some_file.py
+import sys
+# caution: path[0] is reserved for script path (or '' in REPL)
+sys.path.insert(1, './file_import_and_graph/')
+
+import import_DOE
+# ------------------------------------------------------------------------------------------------------------------ #
 # Import the module files. EX. import subsurface as sub
 # ------------------------------------------------------------------------------------------------------------------ #
 import wells as wells
@@ -21,7 +30,9 @@ import wells as wells
 print("The value of CO2 ideal gas constant is: " + str(variables.CO2_IDEAL_GAS_CONST))
 
 # Chaining together the modules below. 
-
+df, radius, no_wells = import_DOE.import_csv("./file_import_and_graph/DOE.csv", 1)
+print("The wellbore radius is: ", radius)
+print("The number of wells is: ", no_wells)
 # ------------------------------------------------------------------------------------------------------------------ #
 # Module name: Wells
 # Required inputs: FILL IN
