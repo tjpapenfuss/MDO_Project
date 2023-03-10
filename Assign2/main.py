@@ -12,6 +12,7 @@ from numpy import *
 import variables
 import pipeline as pipes
 import finance as finance
+import subsurface as sub
 
 # ------------------------------------------------------------------------------------------------------------------ #
 # Import the module files. EX. import subsurface as sub
@@ -49,6 +50,14 @@ print("Pipes velocity output: ", pipes_vel_out)
 print("Pipes temperature output: ", pipes_temp_out)
 print("Pipes cost output: ", pipes_cost_out)
 
+
+# ------------------------------------------------------------------------------------------------------------------ #
+# Module name: Subsurface
+# Required inputs: p_wf_t
+# Outputs: q_inj
+# ------------------------------------------------------------------------------------------------------------------ #
+q_inj = sub.subsurface(10)
+print("The Value of q_inj injection volume is: " + str(q_inj))
 
 
 #Module name: Finance
