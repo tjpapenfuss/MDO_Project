@@ -51,6 +51,13 @@ print("Pipes velocity output: ", pipes_vel_out)
 print("Pipes temperature output: ", pipes_temp_out)
 print("Pipes cost output: ", pipes_cost_out)
 
+# ------------------------------------------------------------------------------------------------------------------ #
+# Module name: Wells
+# Required inputs: avg_vol, Pwh
+# Outputs: p_wf_t
+# ------------------------------------------------------------------------------------------------------------------ #
+p_wf_t = wells.wells(10)
+print("The Value of p_wf_t wellbore injection pressure is: " + str(p_wf_t))
 
 # ------------------------------------------------------------------------------------------------------------------ #
 # Module name: Subsurface
