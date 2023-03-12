@@ -48,8 +48,8 @@ pipes_press_out, pipes_vel_out, pipes_temp_out, pipes_cost_out = pipes.pipes_out
                                                                 variables.p_l, variables.n_pc)
 print("Pipes pressure output: ", pipes_press_out)
 print("Pipes velocity output: ", pipes_vel_out)
-print("Pipes temperature output: ", pipes_temp_out)
-print("Pipes cost output: ", pipes_cost_out)
+#print("Pipes temperature output: ", pipes_temp_out)
+#print("Pipes cost output: ", pipes_cost_out)
 
 # ------------------------------------------------------------------------------------------------------------------ #
 # Module name: Wells
