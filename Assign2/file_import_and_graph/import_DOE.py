@@ -4,16 +4,37 @@ import pandas as pd
 # we need to run our model. 
 def import_csv(fileName, Run_Id):
     
-    #Import the csv files into pandas dataframes.
-    df = pd.read_csv(fileName)
     # Must us -1 because Python starts counting at 0
-    wellbore_radius = df.loc[Run_Id-1]["Wellbore Radius"] 
-    no_wells = df.loc[Run_Id-1]["Number of Wells"]
-    return df, wellbore_radius, no_wells
+    wellbore_radius = df.loc[Run_Id]["Wellbore Radius"] 
+    no_wells = df.loc[Run_Id]["Number of Wells"]
+    return wellbore_radius, no_wells
 
-df, radius, no_wells = import_csv("DOE.csv", 1)
-print("The wellbore radius is: ", radius)
-print("The number of wells is: ", no_wells)
+#Import the csv files into pandas dataframes.
+fileName = "DOE.csv"
+df = pd.read_csv(fileName)
+
+# Setup the variables coming from our design vector
+well_radius = df["Wellbore Radius"].to_numpy()
+no_wells = df["Number of Wells"].to_numpy()
+no_connections = df["Number of Connections"].to_numpy()
+mass_flow_rate = df["Mass Flow Rate"].to_numpy()
+diameter = df["Diameter"].to_numpy()
+length = df["Length"].to_numpy()
+no_compressors = df["Number of Compressors"].to_numpy()
+no_condensers = df["Number of Condensers"].to_numpy()
+compressor_outlet_pressure = df["Compressor Outlet Pressure"].to_numpy()
+hx_outlet_tempt = df["HX Outlet Tempt"].to_numpy()
+
+print(well_radius[5])
+
+# An alternative to the above design. We could use the function I defined above to import the values. 
+# In this method we would loop everything and import the values as we go. 
+index = 0
+for item in range(len(df)):
+    radius, no_wells = import_csv(fileName, index)
+    #print("The wellbore radius is: ", radius)
+    #print("The number of wells is: ", no_wells)
+    index += 1
 
 
 
