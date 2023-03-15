@@ -23,6 +23,7 @@ length = df["Length"].to_numpy()
 no_compressors = df["Number of Compressors"].to_numpy()
 no_condensers = df["Number of Condensers"].to_numpy()
 compressor_outlet_pressure = df["Compressor Outlet Pressure"].to_numpy()
+# Stephen thinks we should set the outlet temp to 25C. Make this a parm instead of Design Var.
 hx_outlet_tempt = df["HX Outlet Tempt"].to_numpy()
 
 print(well_radius[5])
