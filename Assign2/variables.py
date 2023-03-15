@@ -32,13 +32,7 @@ p_ou_78_comp =          0 #Facility,Compressor outlet pressure,"Pressure at outl
 p_ou_910_comp =         0 #Facility,Compressor outlet pressure,"Pressure at outlet of each compressor 910, up to n_comp",kPa
 p_ou_1112_comp =        0 #Facility,Compressor outlet pressure,"Pressure at outlet of each compressor 1112, up to n_comp",kPa
 p_ou_1314_comp =        0 #Facility,Compressor outlet pressure,"Pressure at outlet of each compressor 1314, up to n_comp",kPa
-t_ou_23_hx =            0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 23, up to n_hx",K
-t_ou_45_hx =            0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 45, up to n_hx",K
-t_ou_67_hx =            0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 67, up to n_hx",K
-t_ou_89_hx =            0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 89, up to n_hx",K
-t_ou_1011_hx =          0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 1011, up to n_hx",K
-t_ou_1213_hx =          0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 1213, up to n_hx",K
-t_ou_1415_hx =          0 #Facility,HX Outlet Temperature,"Temp at outlet of each HX 1415, up to n_hx",K
+T_out_hx =             25 #Facility, HX Outlet Temperature for All heat exchangers, Celsius
 cp_CO2 =            0.844 #Facility,CO2 Cp,Specific heat capacity of CO2 at constant pressure,,,0.844,KJ/(kgK)
 cv_CO2 =            0.655 #Facility,CO2 Cp,Specific heat capacity of CO2 at constant pressure,,,0.655,KJ/(kgK)
 
