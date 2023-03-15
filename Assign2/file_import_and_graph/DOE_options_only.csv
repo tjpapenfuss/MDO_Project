@@ -1,4 +1,4 @@
-﻿Wellbore Radius,Number of Wells,Number of Connections,Mass Flow Rate,Diameter,Length,Number of Compressors,Number of Condensers,Compressor Outlet Pressure,HX Outlet Tempt
-0.1043,20,26,250.5,12,1000,10,6,755,25
-0.1649,1,1,1,20,55000,6,10,10,0
+﻿Wellbore Radius,Number of Wells,Number of Connections,Mass Flow Rate,Diameter,Length,Number of Compressors,Number of Condensers,Compressor Outlet Pressure
+0.1043,20,26,250.5,12,1000,10,6,755
+0.1649,1,1,1,20,55000,6,10,10
 0.0437,11,50,500,4,28000,1,1,1500
