@@ -51,6 +51,7 @@ NG_price =           3.06 #estimate of natural gas price $/MMBTU
 ann_elec =         932212 #average estimated heat exchanger electricity needs for a 1231kW sized HX;
 TX_grid =             941 #2021 average of co2 emitted by the electrical grid in TX; lb/MWh
 comp_capex =       2020.6 #simply grabbed from a paper that showed the estimated capital cost of a compressor; $/(kW)
+CO2_crit_p =         7376 #kPA of supercritical point
 hx_capex =         247.35 #simply grabbed from a paper that showed a $300k HX delivered 1231kW of cooling; $/(kW) cooled
 hx_elec =           75.66 #simply grabbed from a paper that showed electrical needs for a certain kW cooler (kWh_elec/kWcooled) per year
 hx_refrig =        0.0097 #simply grabbed from a paper that showed refrigerant needs for a certain kW cooler (kg_refrig/kWcooled) per year
