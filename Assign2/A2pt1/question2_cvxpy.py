@@ -23,7 +23,7 @@ V.value = 1000.0
 #b.value = 0.0
 problem.solve(gp=True)
 print("status:", problem.status)
-print("optimal value", problem.value)
+print("optimal Value: ", problem.value)
 
-print(x.value)
-print(y.value)
+print("X1 value: " + str(x.value))
+print("X2 value: " + str(y.value))
