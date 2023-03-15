@@ -77,7 +77,7 @@ p2,T2,W12,CO2_emit_12,comp_capex_12,comp_om_12,comp_opex_12,m_dot,mtot = facilit
 # print ("annual co2 entering plant ", mtot, " kg CO2 per year")
 
 ##23 Heat Exchanger ----------------------------------------------------------------------------##
-T3 = 25+273
+T3 = variables.T_out_hx+273
 p3,T3,Q23,Q_cool_23,CO2_emit_23,hx_capex_23,hx_opexelec_23,hx_opref_23,hx_opwat_23,hx_opex_23 = facilities.heat_hx(p2,T2,T3,m_dot)
 
 # print ("outlet hx23 press: ", p3, "kPa")
@@ -102,7 +102,7 @@ p4,T4,W34,CO2_emit_34,comp_capex_34,comp_om_34,comp_opex_34,m_dot,mtot = facilit
 # print ("comp opex: $", comp_opex_34)
 
 ##45 Heat Exchanger ----------------------------------------------------------------------------##
-T5 = 25+273
+T5 = variables.T_out_hx+273
 p5,T5,Q45,Q_cool_45,CO2_emit_45,hx_capex_45,hx_opexelec_45,hx_opref_45,hx_opwat_45,hx_opex_45 = facilities.heat_hx(p4,T4,T5,m_dot)
 
 # print ("outlet hx press: ", p5, "kPa")
@@ -127,7 +127,7 @@ p6,T6,W56,CO2_emit_56,comp_capex_56,comp_om_56,comp_opex_56,m_dot,mtot = facilit
 # print ("comp opex: $", comp_opex_56)
 
 ##67 Heat Exchanger ----------------------------------------------------------------------------##
-T7 = 25+273
+T7 = variables.T_out_hx+273
 p7,T7,Q67,Q_cool_67,CO2_emit_67,hx_capex_67,hx_opexelec_67,hx_opref_67,hx_opwat_67,hx_opex_67 = facilities.heat_hx(p6,T6,T7,m_dot)
 
 # print ("outlet hx press: ", p6, "kPa")
@@ -152,7 +152,7 @@ p8,T8,W78,CO2_emit_78,comp_capex_78,comp_om_78,comp_opex_78,m_dot,mtot = facilit
 # print ("comp opex: $", comp_opex_78)
 
 ##89 Heat Exchanger ----------------------------------------------------------------------------##
-T9 = 25+273
+T9 = variables.T_out_hx+273
 p9,T9,Q89,Q_cool_89,CO2_emit_89,hx_capex_89,hx_opexelec_89,hx_opref_89,hx_opwat_89,hx_opex_89 = facilities.heat_hx(p8,T8,T9,m_dot)
 
 # print ("outlet hx press: ", p8, "kPa")
@@ -177,7 +177,7 @@ p10,T10,W910,CO2_emit_910,comp_capex_910,comp_om_910,comp_opex_910,m_dot,mtot = 
 # print ("comp opex: $", comp_opex_910)
 
 ##1011 Heat Exchanger ----------------------------------------------------------------------------##
-T11 = 25+273
+T11 = variables.T_out_hx+273
 p11,T11,Q1011,Q_cool_1011,CO2_emit_1011,hx_capex_1011,hx_opexelec_1011,hx_opref_1011,hx_opwat_1011,hx_opex_1011 = facilities.heat_hx(p10,T10,T11,m_dot)
 
 # print ("outlet hx press: ", p10, "kPa")
@@ -202,7 +202,7 @@ p12,T12,W1112,CO2_emit_1112,comp_capex_1112,comp_om_1112,comp_opex_1112,m_dot,mt
 # print ("comp opex: $", comp_opex_1112)
 
 ##1213 Heat Exchanger ----------------------------------------------------------------------------##
-T13 = 25+273
+T13 = variables.T_out_hx+273
 p13,T13,Q1213,Q_cool_1213,CO2_emit_1213,hx_capex_1213,hx_opexelec_1213,hx_opref_1213,hx_opwat_1213,hx_opex_1213 = facilities.heat_hx(p12,T12,T13,m_dot)
 
 # print ("outlet hx press: ", p12, "kPa")
@@ -227,7 +227,7 @@ p14,T14,W1314,CO2_emit_1314,comp_capex_1314,comp_om_1314,comp_opex_1314,m_dot,mt
 # print ("comp opex: $", comp_opex_1314)
 
 ##1415 Heat Exchanger ----------------------------------------------------------------------------##
-T15 = 25+273
+T15 = variables.T_out_hx+273
 p15,T15,Q1415,Q_cool_1415,CO2_emit_1415,hx_capex_1415,hx_opexelec_1415,hx_opref_1415,hx_opwat_1415,hx_opex_1415 = facilities.heat_hx(p14,T14,T15,m_dot)
 
 # print ("outlet hx press: ", p14, "kPa")
