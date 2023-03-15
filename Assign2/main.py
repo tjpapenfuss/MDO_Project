@@ -61,7 +61,7 @@ print("Pipes velocity output: ", pipes_vel_out)
 
 ## 12 Compressor ------------------------------------------------------------------------------##
 press_out = 345
-p2 = 700
+p2 = 700 #kPa
 test_temp_out = 300
 m_dot = variables.m_dot
 p2,T2,W12,CO2_emit_12,comp_capex_12,comp_om_12,comp_opex_12,m_dot,mtot = facilities.work_comp(press_out, p2, m_dot, test_temp_out)
@@ -91,7 +91,8 @@ p3,T3,Q23,Q_cool_23,CO2_emit_23,hx_capex_23,hx_opexelec_23,hx_opref_23,hx_opwat_
 # print ("hx23 opex: $", hx_opex_23)
 
 ## 34 Compressor ------------------------------------------------------------------------------##
-p4,T4,W34,CO2_emit_34,comp_capex_34,comp_om_34,comp_opex_34,m_dot,mtot = facilities.work_comp(p3, p4, m_dot, T3)
+p4 = 1500 #kPa
+p4,T4,W34,CO2_emit_34,comp_capex_34,comp_om_34,comp_opex_34,m_dot,mtot = facilities.work_comp(p3,p4, m_dot, T3)
 
 # print ("outlet comp press: ", p4, "kPa")
 # print ("outlet comp temp: ", T4, "K")
@@ -116,6 +117,7 @@ p5,T5,Q45,Q_cool_45,CO2_emit_45,hx_capex_45,hx_opexelec_45,hx_opref_45,hx_opwat_
 # print ("hx opex: $", hx_opex_45)
 
 ## 56 Compressor ------------------------------------------------------------------------------##
+p6 = 2500 #kPa
 p6,T6,W56,CO2_emit_56,comp_capex_56,comp_om_56,comp_opex_56,m_dot,mtot = facilities.work_comp(p5, p6, m_dot, T5)
 
 # print ("outlet comp press: ", p6, "kPa")
@@ -141,6 +143,7 @@ p7,T7,Q67,Q_cool_67,CO2_emit_67,hx_capex_67,hx_opexelec_67,hx_opref_67,hx_opwat_
 # print ("hx opex: $", hx_opex_67)
 
 ## 78Compressor ------------------------------------------------------------------------------##
+p8 = 4000 #kPa
 p8,T8,W78,CO2_emit_78,comp_capex_78,comp_om_78,comp_opex_78,m_dot,mtot = facilities.work_comp(p7, p8, m_dot, T7)
 
 # print ("outlet comp press: ", p8, "kPa")
@@ -166,6 +169,7 @@ p9,T9,Q89,Q_cool_89,CO2_emit_89,hx_capex_89,hx_opexelec_89,hx_opref_89,hx_opwat_
 # print ("hx opex: $", hx_opex_89)
 
 ## 910Compressor ------------------------------------------------------------------------------##
+p10 = 5500 #kPa
 p10,T10,W910,CO2_emit_910,comp_capex_910,comp_om_910,comp_opex_910,m_dot,mtot = facilities.work_comp(p9, p10, m_dot, T9)
 
 # print ("outlet comp press: ", p10, "kPa")
@@ -191,6 +195,7 @@ p11,T11,Q1011,Q_cool_1011,CO2_emit_1011,hx_capex_1011,hx_opexelec_1011,hx_opref_
 # print ("hx opex: $", hx_opex_1011)
 
 ##1112 Compressor ------------------------------------------------------------------------------##
+p12 = 6500 #kPa
 p12,T12,W1112,CO2_emit_1112,comp_capex_1112,comp_om_1112,comp_opex_1112,m_dot,mtot = facilities.work_comp(p11, p12, m_dot, T11)
 
 # print ("outlet comp press: ", p12, "kPa")
@@ -216,6 +221,7 @@ p13,T13,Q1213,Q_cool_1213,CO2_emit_1213,hx_capex_1213,hx_opexelec_1213,hx_opref_
 # print ("hx opex: $", hx_opex_1213)
 
 ##1314 Compressor ------------------------------------------------------------------------------##
+p14 = variables.CO2_crit_p #kPa
 p14,T14,W1314,CO2_emit_1314,comp_capex_1314,comp_om_1314,comp_opex_1314,m_dot,mtot = facilities.work_comp(p13, p14, m_dot, T13)
 
 # print ("outlet comp press: ", p14, "kPa")
