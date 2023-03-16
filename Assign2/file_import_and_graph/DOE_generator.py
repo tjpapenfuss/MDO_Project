@@ -1,3 +1,13 @@
+##############################################################################################
+# This module will generate a DOE given a file that has factors and levels. 
+# Inputs: fileName - this is a file with factors and levels.
+# Outputs: 
+#   key_list - all the individual factors from the fileName. This is the first row of items
+#   val_list - all the levels of each factor. This is all the unique values for each factor
+#   DF - a data frame that has a DOE generated. For more information on how this is created
+#        please reference the docs here: https://pypi.org/project/pycubedoe/
+##############################################################################################
+
 import csv
 import collections
 import pycubedoe as pc
