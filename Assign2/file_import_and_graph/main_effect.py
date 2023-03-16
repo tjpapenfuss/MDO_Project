@@ -16,30 +16,14 @@ def main_effect(dict,var):
     import collections
     import pandas as pd
     import numpy as np
-    #dict, df = options()
+    import DOE_generator as deo_gen
 
-    output = var
-    dict = collections.defaultdict(list)
+    #Change the filepath in this line to reflect where the "DOE_options_only.csv" resides.
+    key_list,val_list,df = deo_gen.DOE_generator('C:/Users/jbeil/MDO_Project/Assign2/file_import_and_graph/DOE_options_only.csv')
 
-    #This section will import the "options only csv" to get the factors and levels.  Update options to equal the DOE_options_only.csv location
-    options = open('C:/Users/jbeil/MDO_Project/Assign2/file_import_and_graph/DOE_options_only.csv', 'r', newline='', encoding='utf-8-sig')
-    #options = open('C:/Users/Beerstein/GitHub/MDO_Project/Assign2/file_import_and_graph/DOE_options_only.csv', 'r', newline='', encoding='utf-8-sig')
+    output = key_list[8]
+    df[output] = df[output].astype('int32')
 
-    reader = csv.DictReader(options)
-
-#    #This section will take the "Options Only.csv" and create the dictionaries which will be used to define the main effects for
-#    for row in reader:
-#        for k, v in row.items():
-#            #val_list = list(dict.values())
-#            dict[k].append(v)
-
-    key_list = list(dict.keys())
-    val_list = list(dict.values())
-
-    #This section imports the data to be analyzed
- 
-    df = pd.read_csv('C:/Users/jbeil/MDO_Project/Assign2/file_import_and_graph/DOE_test.csv')
-    #df = pd.read_csv('C:/Users/Beerstein/GitHub/MDO_Project/Assign2/file_import_and_graph/DOE_options_only.csv')
     reader = csv.DictReader(df)
 
     #Calculate the overall mean of NPV.  This assumes the NPV column is labeled 'NPV'
@@ -48,6 +32,7 @@ def main_effect(dict,var):
     npv_mean = npv_total / npv_count
     index = 0
 
+    # Create a scoring matrix for each unique factor in the current list
     factor_score_matrix = np.array([["Factor","Factor Level","Main Effect"]], dtype=object)
 
     for key in key_list:
@@ -58,19 +43,16 @@ def main_effect(dict,var):
             # Proceed with only unique values for each factor
             if x not in factor_list:
                 factor_list.append(x)
-        # Create a scoring matrix for each unique factor in the current list
         
         for current_factor in factor_list:
             #This will filter the data frame on the currently selected factor.  Then it will compute the mean for the currently selected factor
-            temp_df = df[df[key] == float(current_factor)]
+            temp_df = df[df[key] == current_factor]
             factor_npv = temp_df[output].sum()
-            #factor_npv = temp_df['Compressor Outlet Pressure'].sum()
             factor_mean = factor_npv / len(temp_df)
 
             #This will filter the data frame on all values other than the currently selected factor.  Then it will compute the mean NPV for these other values
-            temp_df = df[df[key] != float(current_factor)]
+            temp_df = df[df[key] != current_factor]
             nonfactor_npv = temp_df[output].sum()
-            #nonfactor_npv = temp_df['Compressor Outlet Pressure'].sum()
             nonfactor_mean = factor_npv / len(temp_df)
 
             main_effect = factor_mean - npv_mean
