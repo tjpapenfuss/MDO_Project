@@ -1,7 +1,8 @@
 ##############################################################################################
 # This module will perform calculations for pipelines.
-# Inputs: mass_dot, press_source, p_d, p_l, n_pc
-# Outputs: press_i, vel_i, temp_i, cost_pipe
+# Inputs: mass_dot, press_source, p_d, p_l, n_pc (all units are SI (ft, lbsf, lbsm, PSI))
+# Intermediate variables: Reynolds number, fanning factor, velocity (of CO2 in pipe), pressure delta (in PSI)
+# Outputs: press_i, vel_i, temp_i, cost_pipe (all units are SI (ft, lbsf, lbsm, PSI))
 ##############################################################################################
 
 import math
