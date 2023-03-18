@@ -34,6 +34,6 @@ def DOE_generator(fileName):
 
 
 # Below is for testing the above functionality works. 
-# key_list, val_list, df = DOE_generator('DOE_options_only.csv')
-# print(df)
+key_list, val_list, df = DOE_generator('DOE_options_only.csv')
+print(df)
 # print(key_list)

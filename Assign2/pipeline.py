@@ -46,7 +46,8 @@ def pipes_out(mass_dot, press_source, p_d, p_l): #, n_pc):
     temp_source = variables.temp_source
  
     ##This section performs calculations based on parameters and inputs
-    vel = mass_dot / (rho * math.pi * ((p_d / 2) ** 2))
+    # *2.2 converts from kg/s to lb/s
+    vel = (mass_dot*2.2) / (rho * math.pi * ((p_d / 2) ** 2))
   
     reynolds_number = 1488*rho*vel*p_d / u_w
    
