@@ -4,7 +4,7 @@ rw =              0.12175 #Wellbore Radius Inner radius of injection well tubing
 n_wells =              10 #Wells,Number of wells,Number of injection wells in system
 rel_rough =        0.0006 #Drilling,Relative roughness,Relative roughness of wellbore,,,0.0006,diml
 depth =              5500 #Drilling,Well total depth,Average depth of wells to be drilled,5000,6000,5500,ft
-rho_CO2sc =          37.5 #Drilling,CO2 fluid density at Super Critcal, lb/ft3 
+rho_CO2 =          0.1144 #Drilling,CO2 fluid density at Super Critcal, lb/ft3 
 
 # pipeline
 n_pc =                  0 #Pipeline,Number of connections,Number of clients/sources we plan to bring in,50,1,3,diml
