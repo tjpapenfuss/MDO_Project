@@ -14,29 +14,22 @@ import pipeline as pipes
 import finance as finance
 import subsurface as sub
 import facilities
-
-
-# ------------------------------------------------------------------------------------------------------------------ #
-# Import the module files. EX. import subsurface as sub
-# ------------------------------------------------------------------------------------------------------------------ #
 import wells as wells
+import pandas as pd
 
-print("The value of CO2 ideal gas constant is: " + str(variables.CO2_IDEAL_GAS_CONST))
+# TO DO: Add in the DOE generation functionality. 
+imported_df = pd.read_csv("./file_import_and_graph/DOE_tanner.csv")
 
-# Chaining together the modules below. 
-
-# ------------------------------------------------------------------------------------------------------------------ #
-# Module name: Wells
-# Required inputs: FILL IN
-# Outputs: FILL IN
-# ------------------------------------------------------------------------------------------------------------------ #
-#print("Wells res depth: ", wells.res_depth)
-
-# ------------------------------------------------------------------------------------------------------------------ #
-# Module name: 
-# Required inputs:
-# Outputs: 
-# ------------------------------------------------------------------------------------------------------------------ #
+# Variable initialization from the DOE. 
+wellbore_radius = imported_df.loc[0]["Wellbore Radius"] 
+num_wells = imported_df.loc[0]["Number of Wells"]
+num_connections = imported_df.loc[0]["Number of Connections"]
+mass_flow_rate = imported_df.loc[0]["Mass Flow Rate"]
+diameter = imported_df.loc[0]["Diameter"]
+length = imported_df.loc[0]["Length"]
+num_compressors = imported_df.loc[0]["Number of Compressors"]
+num_condensers = imported_df.loc[0]["Number of Condensers"]
+comp_out_press = imported_df.loc[0]["Compressor Outlet Pressure"]
 
 
 # ------------------------------------------------------------------------------------------------------------------ #
@@ -44,9 +37,9 @@ print("The value of CO2 ideal gas constant is: " + str(variables.CO2_IDEAL_GAS_C
 # Required inputs:  m_dot, press_source, p_d, p_l, n_pc
 # Outputs: p_i, t_i, v_i
 # ------------------------------------------------------------------------------------------------------------------ #
-pipes_press_out, pipes_vel_out, pipes_temp_out, pipes_cost_out = pipes.pipes_out(variables.m_dot, 
-                                                                variables.press_source, variables.p_d, 
-                                                                variables.p_l, variables.n_pc)
+diameter_inches = diameter / 12
+pipes_press_out, pipes_vel_out, pipes_temp_out = pipes.pipes_out(mass_flow_rate, variables.press_source, 
+                                                            diameter_inches, length) # , variables.n_pc)
 print("Pipes pressure output: ", pipes_press_out)
 print("Pipes velocity output: ", pipes_vel_out)
 #print("Pipes temperature output: ", pipes_temp_out)
@@ -60,10 +53,10 @@ print("Pipes velocity output: ", pipes_vel_out)
 # ------------------------------------------------------------------------------------------------------------------ #
 
 ## 12 Compressor ------------------------------------------------------------------------------##
-press_out = 345
+press_out = 345 # pipes_press_out * 6.89476  #
 p2 = 700 #kPa
-test_temp_out = 300
-m_dot = variables.m_dot
+test_temp_out = pipes_temp_out # 300
+m_dot = mass_flow_rate / 2.20462 
 p2,T2,W12,CO2_emit_12,comp_capex_12,comp_om_12,comp_opex_12,m_dot,mtot = facilities.work_comp(press_out, p2, m_dot, test_temp_out)
 
 # print ("outlet comp12 press: ", p2, "kPa")
@@ -233,6 +226,7 @@ p14,T14,W1314,CO2_emit_1314,comp_capex_1314,comp_om_1314,comp_opex_1314,m_dot,mt
 # print ("comp opex: $", comp_opex_1314)
 
 ##1415 Heat Exchanger ----------------------------------------------------------------------------##
+# p15 is the well head pressure
 T15 = variables.T_out_hx+273
 p15,T15,Q1415,Q_cool_1415,CO2_emit_1415,hx_capex_1415,hx_opexelec_1415,hx_opref_1415,hx_opwat_1415,hx_opex_1415 = facilities.heat_hx(p14,T14,T15,m_dot)
 
@@ -263,7 +257,9 @@ cost_comp_opex, cost_hx_opex, OPEX_facilities = facilities.fac_opex (comp_opex_1
 # Required inputs: avg_vol, Pwh
 # Outputs: p_wf_t
 # ------------------------------------------------------------------------------------------------------------------ #
-p_wf_t = wells.wells(10)
+pressure_wellhead = p15 / 6.89476
+mass_flow_rate_wells = mass_flow_rate * 2.2
+p_wf_t = wells.wells(mass_flow_rate_wells, pressure_wellhead)
 print("The Value of p_wf_t wellbore injection pressure is: " + str(p_wf_t))
 
 # ------------------------------------------------------------------------------------------------------------------ #
@@ -271,15 +267,21 @@ print("The Value of p_wf_t wellbore injection pressure is: " + str(p_wf_t))
 # Required inputs: p_wf_t
 # Outputs: q_inj
 # ------------------------------------------------------------------------------------------------------------------ #
-q_inj = sub.subsurface(10)
+q_inj = sub.subsurface(p_wf_t)
 print("The Value of q_inj injection volume is: " + str(q_inj))
 
 
 #Module name: Finance
 #Required inputs: p_d, p_l, q_inj, n_wells
 #Outputs: NPV
-q_inj=50                #q_inj should be an output of a subsurface function, so delete this once it's available
-revenue = finance.revenue_func(q_inj, variables.n_wells) 
-CAPEX_total, CAPEX_pipeline, CAPEX_site = finance.CAPEX_func(variables.p_l, variables.p_d, variables.n_wells)
-OPEX_total = finance.OPEX_func(CAPEX_pipeline, variables.n_wells)
+# q_inj=50                #q_inj should be an output of a subsurface function, so delete this once it's available
+q_inj_finance = q_inj / 1000 # Convert from scf to mcf
+revenue = finance.revenue_func(q_inj_finance, variables.n_wells) 
+CAPEX_total, CAPEX_pipeline, CAPEX_site = finance.CAPEX_func(variables.p_l, variables.p_d, variables.n_wells, num_connections, CAPEX_facilities)
+OPEX_total = finance.OPEX_func(CAPEX_pipeline, variables.n_wells, OPEX_facilities)
 NPV = finance.NPV_func(CAPEX_total, revenue, CAPEX_site, OPEX_total)
+
+print("The Value of NPV is: " + str(NPV))
+print("The Value of CAPEX_total is: " + str(CAPEX_total))
+print("The Value of OPEX_total is: " + str(OPEX_total))
+print("The Value of CAPEX_pipeline is: " + str(CAPEX_pipeline))

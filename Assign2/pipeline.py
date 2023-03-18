@@ -9,7 +9,7 @@ import math
 import variables
 
 # function definition
-def pipes_out(mass_dot, press_source, p_d, p_l, n_pc):
+def pipes_out(mass_dot, press_source, p_d, p_l): #, n_pc):
 
     ##This section defines the inputs to be used by the pipeline calculations
     ##These values need to come from the optimizer or initial design vector
@@ -23,7 +23,7 @@ def pipes_out(mass_dot, press_source, p_d, p_l, n_pc):
     fanning = 0
 
     #density imported (lb/ft^3)​
-    rho = variables.rho_CO2sc
+    rho = variables.rho_CO2
     #density used (kg/m^3)
     #rho = rho_import * 16.018463
 
@@ -44,7 +44,7 @@ def pipes_out(mass_dot, press_source, p_d, p_l, n_pc):
 
     #temp at source​
     temp_source = variables.temp_source
-
+ 
     ##This section performs calculations based on parameters and inputs
     vel = mass_dot / (rho * math.pi * ((p_d / 2) ** 2))
   
@@ -64,6 +64,6 @@ def pipes_out(mass_dot, press_source, p_d, p_l, n_pc):
 
     temp_i = temp_source  #this assumes no heat gained or lost in the system
 
-    cost_pipe = p_l * cost_per_foot + cost_per_pc * n_pc
+    #cost_pipe = p_l * cost_per_foot + cost_per_pc * n_pc
 
-    return press_i, vel_i, temp_i, cost_pipe
+    return press_i, vel_i, temp_i #, cost_pipe

@@ -22,7 +22,7 @@ def revenue_func(q_inj, n_wells):
     return revenue
 
 ### Capex ###
-def CAPEX_func(p_l,p_d, n_wells):
+def CAPEX_func(p_l,p_d, n_wells, n_pc, CAPEX_facility):
     #variables/parameters used
     depth = variables.depth
     c_site = variables.c_site
@@ -33,14 +33,14 @@ def CAPEX_func(p_l,p_d, n_wells):
     
     CAPEX_well = (-3.9*10**(-8)*(depth/m_ft_convert)**3 + 4*10**(-4)*(depth/m_ft_convert)**2 - 0.84*(depth/m_ft_convert) + 903)*(depth/m_ft_convert)*dollar_2005_2023_convert
     CAPEX_wells_total = CAPEX_well*n_wells
-    CAPEX_pipeline = ((32.086*(p_l/(m_ft_convert*1000))**(-0.033*p_d))*(p_l/m_ft_convert))*dollar_2005_2023_convert
-    CAPEX_facility = 0      ############# NEEDS UPDATE!!!!! ########
+    CAPEX_pipeline = ((32.086*((p_l*n_pc)/(m_ft_convert*1000))**(-0.033*p_d))*((p_l*n_pc)/m_ft_convert))*dollar_2005_2023_convert
+    #CAPEX_facility = 0      ############# NEEDS UPDATE!!!!! ########
     CAPEX_site = (c_site*n_wells)*dollar_2005_2023_convert
     CAPEX_total = CAPEX_wells_total+CAPEX_facility+CAPEX_pipeline+CAPEX_site
     return CAPEX_total, CAPEX_pipeline, CAPEX_site
 
 ### OPEX / Variable Cost ###
-def OPEX_func(CAPEX_pipeline, n_wells):
+def OPEX_func(CAPEX_pipeline, n_wells, OPEX_facility):
     #variables/parameters used
     depth = variables.depth
 
@@ -50,7 +50,7 @@ def OPEX_func(CAPEX_pipeline, n_wells):
 
     OPEX_pipeline = CAPEX_pipeline*0.022
     OPEX_wells = (8.76*(depth/m_ft_convert)+13267)*dollar_2005_2023_convert*n_wells
-    OPEX_facility = 0        ############# NEEDS UPDATE!!!!!! ########
+    # OPEX_facility = 0        ############# NEEDS UPDATE!!!!!! ########
     OPEX_total = OPEX_facility+OPEX_pipeline+OPEX_wells
     return OPEX_total
 
