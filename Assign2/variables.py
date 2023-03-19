@@ -11,6 +11,9 @@ n_pc =                  0 #Pipeline,Number of connections,Number of clients/sour
 m_dot =               0.2 #Pipeline,Mass_flow_rate,CO2 mass flow rate,lbs/s
 p_d =                 .25 #Pipeline,Diameter,Inner diameter of pipe,in
 p_l =               10000 #Pipeline,Length,Length from sales point to facility,ft
+mu_o =             .01480 #Pipeline, C02 centipoise viscosity, centipoise
+temp_o_c02 =       527.67 #Pipeline, C02 reference temperature, Rankine
+sutherland_c =        240 #Pipeline, Sutherland constant, unitless 
 
 gravity =          32.174 #Pipeline,Gravity,ft/s^2
 abs_rough =            .1 #Pipeline,Absolute Roughness,in
