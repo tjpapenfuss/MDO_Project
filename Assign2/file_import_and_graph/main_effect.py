@@ -20,11 +20,10 @@ def main_effect(dict,var):
 
     #Change the filepath in this line to reflect where the "DOE_options_only.csv" resides.
 
-    key_list,val_list,df = deo_gen.DOE_generator('C:/Users/Beerstein/GitHub/MDO_Project/Assign2/file_import_and_graph/DOE_options_only.csv')
+    key_list,val_list,df = deo_gen.DOE_generator('./file_import_and_graph/DOE_options_only.csv')
 
-    df = pd.read_csv('C:/Users/Beerstein/GitHub/MDO_Project/Assign2/file_import_and_graph/final_df.csv', encoding='utf-8')
-    #df = open('C:/Users/Beerstein/GitHub/MDO_Project/Assign2/file_import_and_graph/final_df.csv', 'r', newline='', encoding='utf-8-sig')
-
+    df = pd.read_csv('./file_import_and_graph/final_df.csv', encoding='utf-8')
+    
     df_headers = list(df)
     NPV_output = df_headers[16]
     mtot_output = df_headers[17]

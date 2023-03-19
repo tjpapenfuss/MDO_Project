@@ -14,7 +14,6 @@ p_l =               10000 #Pipeline,Length,Length from sales point to facility,f
 mu_o =             .01480 #Pipeline, C02 centipoise viscosity, centipoise
 temp_o_c02 =       527.67 #Pipeline, C02 reference temperature, Rankine
 sutherland_c =        240 #Pipeline, Sutherland constant, unitless 
-
 gravity =          32.174 #Pipeline,Gravity,ft/s^2
 abs_rough =            .1 #Pipeline,Absolute Roughness,in
 cost_per_foot =        10 #Pipeline,Cost per foot,Cost for one foot of piping,,,,$
