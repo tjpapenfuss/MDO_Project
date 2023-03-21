@@ -45,7 +45,7 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
     ## 12 Compressor ------------------------------------------------------------------------------##
     #press_out = 345 
     press_out = pipes_press_out# at or below 350 kPa
-    p2 = 700 #kPa
+    p2 = press_out #kPa
     test_temp_out = pipes_temp_out # 300
     m_dot = mass_flow_rate
     p2,T2,W12,CO2_emit_12,comp_capex_12,comp_om_12,comp_opex_12,m_dot,mtot = facilities.work_comp(press_out, p2, m_dot, test_temp_out)
@@ -283,7 +283,7 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
 
 
 # TO DO: Add in the DOE generation functionality. 
-imported_df = pd.read_csv("./DOE_tanner.csv", index_col=0)
+imported_df = pd.read_csv("./file_import_and_graph/DOE_tanner.csv", index_col=0)
 npv_array = []
 mtot_array = []
 capex_array = []
