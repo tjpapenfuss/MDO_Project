@@ -22,8 +22,8 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
                 pipeline_length, num_compressors, num_condensers, comp_out_press, p2,p4,p6,p8,p10,p12):
     # ------------------------------------------------------------------------------------------------------------------ #
     # Module name: Pipeline
-    # Required inputs:  m_dot, press_source, p_d, p_l, n_pc
-    # Outputs: p_i, t_i, v_i
+    # Required inputs:  mass_dot, press_source, p_d, p_l, n_pc (all units are SI (ft, lbsf, lbsm, PSI))
+    # Outputs: press_i (kPa), vel_i (m/s), temp_i (K), CO2_emit_d, comp_capex_d, comp_opex_d
     # ------------------------------------------------------------------------------------------------------------------ #
     diameter_inches = pipeline_diameter / 12
     pipes_press_out, pipes_vel_out, pipes_temp_out, CO2_emit_pipes, comp_capex_pipes, comp_opex_pipes = pipes.pipes_out(mass_flow_rate, 
@@ -44,7 +44,7 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
 
     ## 12 Compressor ------------------------------------------------------------------------------##
     #press_out = 345 
-    press_out = pipes_press_out# * 6.89476  #
+    press_out = pipes_press_out# at or below 350 kPa
     p2 = 700 #kPa
     test_temp_out = pipes_temp_out # 300
     m_dot = mass_flow_rate
@@ -283,7 +283,7 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
 
 
 # TO DO: Add in the DOE generation functionality. 
-imported_df = pd.read_csv("C:/Users/Beerstein/GitHub/MDO_Project/Assign2/file_import_and_graph/DOE_tanner.csv", index_col=0)
+imported_df = pd.read_csv("./DOE_tanner.csv", index_col=0)
 npv_array = []
 mtot_array = []
 capex_array = []

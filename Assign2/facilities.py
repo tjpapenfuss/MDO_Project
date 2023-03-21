@@ -173,6 +173,6 @@ def fac_capex(comp_capex_pipes,comp_capex_12,comp_capex_34,comp_capex_56,comp_ca
 def fac_opex (comp_opex_pipes,comp_opex_12,comp_opex_34,comp_opex_56,comp_opex_78,comp_opex_910,comp_opex_1112,comp_opex_1314,hx_opex_23,hx_opex_45,hx_opex_67,hx_opex_89,hx_opex_1011,hx_opex_1213,hx_opex_1415):
     cost_comp_opex = comp_opex_12 + comp_opex_34 + comp_opex_56 + comp_opex_78 + comp_opex_910 + comp_opex_1112 + comp_opex_1314 #operating cost for compressors ($)
     cost_hx_opex = hx_opex_23 + hx_opex_45 + hx_opex_67 + hx_opex_89 + hx_opex_1011 + hx_opex_1213 + hx_opex_1415 #operating cost for hx ($)
-    cost_fac_opex = cost_comp_opex + cost_hx_opex + comp_opex_pipes
+    cost_fac_opex = cost_comp_opex + cost_hx_opex + comp_opex_pipes  
     
     return cost_comp_opex, cost_hx_opex, cost_fac_opex

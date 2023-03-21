@@ -19,9 +19,9 @@ abs_rough =            .1 #Pipeline,Absolute Roughness,in
 cost_per_foot =        10 #Pipeline,Cost per foot,Cost for one foot of piping,,,,$
 cost_per_pc =          50 #Pipeline,Cost per connection,Cost for one source connection,,,,$
 press_source =        150 #Pipeline,Pressure at Source,Pressure at the source,,,,psi
-temp_source =         293 #Pipeline,Temperature at Source,Temperature at the source,,,,k
+temp_source =         293 #Pipeline,Temperature at Source,Temperature at the source,,,,K
 p1 =                    0 #Pipeline pressure at inlet of facility, psi
-T1 =                    0 #Pipeline temperature at inlet of facility, psi
+T1 =                    0 #Pipeline temperature at inlet of facility, K
 
 # facility
 n_comp =                0 #Facility,Number of Compressors,Number of Compressors,diml
