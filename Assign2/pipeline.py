@@ -21,7 +21,7 @@ def pipes_out(mass_dot, press_source, p_d, p_l):#, n_pc):
     temp = variables.temp_source
 
     #rho_new is in kg/m3
-    rho_new = mol_mass_co2 * press / (8.3145 * temp)
+    rho_new = mol_mass_co2 * press / (8.3145 * temp )
     
     #this converts rho_new to lb/ft3
     #rho_new = rho_new / 16.018
@@ -62,33 +62,36 @@ def pipes_out(mass_dot, press_source, p_d, p_l):#, n_pc):
 
     ##This section performs calculations based on parameters and inputs
     #This will compute velocity in m/s
-    vel = (mass_dot) / (rho_new * math.pi * ((p_d / (2)) ** 2)) 
+    vel = (mass_dot) / (rho_new * math.pi * ((p_d / (2)) ** 2))
 
     #reynolds_number = 1488*rho_new*vel*(p_d) / mu_C02
-    reynolds_number = rho_new*vel*(p_d) / (mu_C02/100)
+    reynolds_number = rho_new*vel*(p_d) / (mu_C02/1000)
 
     fanning = (1/(-4*math.log10   (0.2698*(k/p_d)-5.0452/      \
                 reynolds_number*math.log10(.3539*(k/p_d)       \
                 **1.1098+5.8506/(reynolds_number)**0.8981)    )))**2
-    
-    #fanning = (.0055*(1+(2*10**4*k/p_d+10**6/reynolds_number)**(1/3)))
-    
+
     #this is technically: press_delta = 2*fanning*rho*vel_avg*pipe_length / (g*pipe_diameter)
     #however, where do we average the velocities?
 
     #Calculate pressure delta (pascals)
-    press_delta = 2*fanning*rho_new*vel**2*p_l / (g*p_d)
-    
-    #compute the new facilities input pressure in kPa
-    press_i = (press - press_delta) / 1000
+    press_delta = 2*fanning*rho_new*vel**2*p_l / (p_d)
 
-    if press_i < 350:
+    #compute the new facilities input pressure in kPa
+    press_i = (press - press_delta) 
+
+    if press_i < 350000:
         #if you're here then the pressure exiting the pipe is too low and requires a compressor before entering the facilities
         n = variables.n_poly
         Ti = temp #convert to Kelvin
-        pi = press / 1000
-        po = (350000 - (press - press_delta)) / 1000 #figure out the work to reach the standardized output to facilities module (350 kPa)
-               
+        #pi = press / 1000
+        if press_i < 0:
+            pi = 1
+        else:
+            pi = press_i / 1000
+        po = 350 
+        #po = (350000-(press - press_delta)) / 1000 #figure out the work to reach the standardized output to facilities module (350 kPa)
+        
         #volumetric flowrate at inlet of compressor, m^3/s
         vol = mass_dot / rho_new 
         
@@ -121,16 +124,26 @@ def pipes_out(mass_dot, press_source, p_d, p_l):#, n_pc):
         comp_opex_d = Wd*NG_price*365 + comp_om_d
         #print ("Wd O&M and fuel costs approximately $", comp_opex_d, " per year")
         temp_i = To
-        press_i = 350
+        press_i = po
     else:
         temp_i = temp  #this assumes no heat gained or lost in the system
         CO2_emit_d = 0
         comp_capex_d = 0
-        comp_opex_d = 0        
+        comp_opex_d = 0    
+        vol = 0
+        vo_dot = 0
+        To = 0
+        Wd = 0    
+        #convert back to kPa
+        press_i = press_i / 1000 
     vel_i = vel #assumes no velocity lost or added       
-    print('press, vel,           temp,               co2,               capex,                      opex')
-    print(press_i, vel_i, temp_i, CO2_emit_d, comp_capex_d, comp_opex_d)
+    #Used for testing
+    # print('press,          vel,           temp,               co2,               capex,                      opex')
+    # print(press_i, vel_i, temp_i, CO2_emit_d, comp_capex_d, comp_opex_d)
+    # print('vol,                vo_dot,                To,             Wd')    
+    # print(vol,vo_dot,To,Wd)
+    # x='foo'
     return press_i, vel_i, temp_i, CO2_emit_d, comp_capex_d, comp_opex_d
 
 #used for testing
-#pipes_out(10, 10, 4/12, 55000)
+# pipes_out(15, 150, 12/12, 55000)
