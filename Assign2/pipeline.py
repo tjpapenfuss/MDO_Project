@@ -77,13 +77,15 @@ def pipes_out(mass_dot, press_source, p_d, p_l):#, n_pc):
     #Calculate pressure delta (pascals)
     press_delta = 2*fanning*rho_new*vel**2*p_l / (p_d)
 
-    #compute the new facilities input pressure in kPa
+    #compute the new facilities input pressure
     press_i = (press - press_delta) 
 
     if press_i < 350000:
         #if you're here then the pressure exiting the pipe is too low and requires a compressor before entering the facilities
+        #equations in this section require pressures to be in kPa
         n = variables.n_poly
         Ti = temp #convert to Kelvin
+       
         #pi = press / 1000
         if press_i < 0:
             pi = 1
@@ -92,6 +94,9 @@ def pipes_out(mass_dot, press_source, p_d, p_l):#, n_pc):
         po = 350 
         #po = (350000-(press - press_delta)) / 1000 #figure out the work to reach the standardized output to facilities module (350 kPa)
         
+        #Convert rho_new to work with kPa
+        rho_new = rho_new / 1000
+
         #volumetric flowrate at inlet of compressor, m^3/s
         vol = mass_dot / rho_new 
         
