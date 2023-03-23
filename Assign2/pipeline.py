@@ -52,7 +52,6 @@ def pipes_out(mass_dot, press_source, p_d, p_l):#, n_pc):
 
     #viscosity of C02 in centipoise
     mu_C02 = mu_o * ((0.555 * t_o + sutherland) / (0.555 * (temp * 1.8)+sutherland)) * (temp * 1.8 / t_o) ** (3/2)
-
     #Convert pipe dimensions to meters.  (p_d is converted to feet in main.py before calling pipelines.py)
     p_d = p_d / 3.281
     p_l = p_l / 3.281 
@@ -151,4 +150,4 @@ def pipes_out(mass_dot, press_source, p_d, p_l):#, n_pc):
     return press_i, vel_i, temp_i, CO2_emit_d, comp_capex_d, comp_opex_d
 
 #used for testing
-# pipes_out(15, 150, 12/12, 55000)
+pipes_out(15, 150, 12/12, 55000)
