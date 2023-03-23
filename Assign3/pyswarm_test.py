@@ -23,7 +23,7 @@ animation = plot_contour(pos_history=optimizer.pos_history,
 # f = r"./animation.mp4" 
 # writervideo = animation.FFMpegWriter(fps=60) 
 # animation.save(f, writer=writervideo) 
-#animation.save('animation.mp4')
+animation.save('animation.mp4')
 
 #Code for 3D Plot :
 # The preprocessing
@@ -38,5 +38,5 @@ animation3d = plot_surface(pos_history=pos_history_3d, # The cost_history that w
 # f = r"./sphere.mp4" 
 # writervideo = animation.FFMpegWriter(fps=60) 
 # animation.save(f, writer=writervideo) 
-animation3d.show()
-#animation3d.save('sphere.mp4')
+
+animation3d.save('sphere.mp4')
