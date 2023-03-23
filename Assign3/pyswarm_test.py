@@ -23,13 +23,14 @@ animation = plot_contour(pos_history=optimizer.pos_history,
 # f = r"./animation.mp4" 
 # writervideo = animation.FFMpegWriter(fps=60) 
 # animation.save(f, writer=writervideo) 
-animation.save('animation.mp4')
+#animation.save('animation.mp4')
 
 #Code for 3D Plot :
 # The preprocessing
 pos_history_3d = m.compute_history_3d(optimizer.pos_history)
 # Adjusting the figure
 d = Designer(limits=[(-1,1), (-1,1), (-0.1,1)], label=['x-axis', 'y-axis', 'z-axis'])
+
 animation3d = plot_surface(pos_history=pos_history_3d, # The cost_history that we computed
                            mesher=m, designer=d,       # Various Customizations
                            mark=(0,0,0))               # Mark the minima
@@ -37,5 +38,5 @@ animation3d = plot_surface(pos_history=pos_history_3d, # The cost_history that w
 # f = r"./sphere.mp4" 
 # writervideo = animation.FFMpegWriter(fps=60) 
 # animation.save(f, writer=writervideo) 
-
-animation3d.save('sphere.mp4')
+animation3d.show()
+#animation3d.save('sphere.mp4')
