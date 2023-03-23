@@ -22,14 +22,16 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
                 pipeline_length, num_compressors, num_condensers, comp_out_press, p2,p4,p6,p8,p10,p12):
     # ------------------------------------------------------------------------------------------------------------------ #
     # Module name: Pipeline
-    # Required inputs:  m_dot, press_source, p_d, p_l, n_pc
-    # Outputs: p_i, t_i, v_i
+    # Required inputs:  mass_dot, press_source, p_d, p_l, n_pc (all units are SI (ft, lbsf, lbsm, PSI))
+    # Outputs: press_i (kPa), vel_i (m/s), temp_i (K), CO2_emit_d, comp_capex_d, comp_opex_d
     # ------------------------------------------------------------------------------------------------------------------ #
     diameter_inches = pipeline_diameter / 12
-    pipes_press_out, pipes_vel_out, pipes_temp_out = pipes.pipes_out(mass_flow_rate, variables.press_source, 
-                                                                diameter_inches, pipeline_length) # , variables.n_pc)
-    print("Pipes pressure output: ", pipes_press_out)
-    print("Pipes velocity output: ", pipes_vel_out)
+    pipes_press_out, pipes_vel_out, pipes_temp_out, CO2_emit_pipes, comp_capex_pipes, comp_opex_pipes = pipes.pipes_out(mass_flow_rate, 
+                                                                                                variables.press_source, 
+                                                                                                diameter_inches, 
+                                                                                                pipeline_length)
+    #print("Pipes pressure output: ", pipes_press_out)
+    #print("Pipes velocity output: ", pipes_vel_out)
     #print("Pipes temperature output: ", pipes_temp_out)
     #print("Pipes cost output: ", pipes_cost_out)
 
@@ -41,8 +43,9 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
     # ------------------------------------------------------------------------------------------------------------------ #
 
     ## 12 Compressor ------------------------------------------------------------------------------##
-    press_out = 345 # pipes_press_out * 6.89476  #
-    p2 = 700 #kPa
+    #press_out = 345 
+    press_out = pipes_press_out# at or below 350 kPa
+    p2 = press_out #kPa
     test_temp_out = pipes_temp_out # 300
     m_dot = mass_flow_rate
     p2,T2,W12,CO2_emit_12,comp_capex_12,comp_om_12,comp_opex_12,m_dot,mtot = facilities.work_comp(press_out, p2, m_dot, test_temp_out)
@@ -230,16 +233,16 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
 
 
     ##CO2 generated----------------------------------------------------------------------------------##
-    tot_co2_gen = facilities.co2_gen(CO2_emit_12,CO2_emit_23,CO2_emit_34,CO2_emit_45,CO2_emit_56,CO2_emit_67,CO2_emit_78,CO2_emit_910,CO2_emit_1011,CO2_emit_1112,CO2_emit_1213,CO2_emit_1314,CO2_emit_1415)
+    tot_co2_gen = facilities.co2_gen(CO2_emit_pipes,CO2_emit_12,CO2_emit_23,CO2_emit_34,CO2_emit_45,CO2_emit_56,CO2_emit_67,CO2_emit_78,CO2_emit_910,CO2_emit_1011,CO2_emit_1112,CO2_emit_1213,CO2_emit_1314,CO2_emit_1415)
     print("annual co2 entering plant ", mtot/1000/1000000, " million metric tons/year")
     print("total_co2_gen: ", tot_co2_gen/1000/1000000, " million metric tons/year")
     print("net co2 MMT/year", -(mtot-tot_co2_gen)/1000/1000000)
 
     ##FAC Capex----------------------------------------------------------------------------------##
-    cost_comp_capex, cost_hx_capex, CAPEX_facilities = facilities.fac_capex(comp_capex_12,comp_capex_34,comp_capex_56,comp_capex_78,comp_capex_910,comp_capex_1112,comp_capex_1314,hx_capex_23,hx_capex_45,hx_capex_67,hx_capex_89,hx_capex_1011,hx_capex_1213,hx_capex_1415)
+    cost_comp_capex, cost_hx_capex, CAPEX_facilities = facilities.fac_capex(comp_capex_pipes,comp_capex_12,comp_capex_34,comp_capex_56,comp_capex_78,comp_capex_910,comp_capex_1112,comp_capex_1314,hx_capex_23,hx_capex_45,hx_capex_67,hx_capex_89,hx_capex_1011,hx_capex_1213,hx_capex_1415)
 
     ##FAC OPEX----------------------------------------------------------------------------------##
-    cost_comp_opex, cost_hx_opex, OPEX_facilities = facilities.fac_opex (comp_opex_12,comp_opex_34,comp_opex_56,comp_opex_78,comp_opex_910,comp_opex_1112,comp_opex_1314,hx_opex_23,hx_opex_45,hx_opex_67,hx_opex_89,hx_opex_1011,hx_opex_1213,hx_opex_1415)
+    cost_comp_opex, cost_hx_opex, OPEX_facilities = facilities.fac_opex (comp_opex_pipes,comp_opex_12,comp_opex_34,comp_opex_56,comp_opex_78,comp_opex_910,comp_opex_1112,comp_opex_1314,hx_opex_23,hx_opex_45,hx_opex_67,hx_opex_89,hx_opex_1011,hx_opex_1213,hx_opex_1415)
 
 
     # ------------------------------------------------------------------------------------------------------------------ #

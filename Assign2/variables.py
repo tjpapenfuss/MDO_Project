@@ -9,17 +9,19 @@ rho_CO2 =          0.1144 #Drilling,CO2 fluid density at Super Critcal, lb/ft3
 # pipeline
 n_pc =                  0 #Pipeline,Number of connections,Number of clients/sources we plan to bring in,50,1,3,diml
 m_dot =               0.2 #Pipeline,Mass_flow_rate,CO2 mass flow rate,lbs/s
-p_d =                 .25 #Pipeline,Diameter,Inner diameter of pipe,in
+p_d =                 .25 #Pipeline,Diameter,Inner diameter of pipe,ft
 p_l =               10000 #Pipeline,Length,Length from sales point to facility,ft
-
+mu_o =             .01480 #Pipeline, C02 centipoise viscosity, centipoise
+temp_o_c02 =       527.67 #Pipeline, C02 reference temperature, Rankine
+sutherland_c =        240 #Pipeline, Sutherland constant, unitless
 gravity =          32.174 #Pipeline,Gravity,ft/s^2
 abs_rough =            .1 #Pipeline,Absolute Roughness,in
 cost_per_foot =        10 #Pipeline,Cost per foot,Cost for one foot of piping,,,,$
 cost_per_pc =          50 #Pipeline,Cost per connection,Cost for one source connection,,,,$
 press_source =        150 #Pipeline,Pressure at Source,Pressure at the source,,,,psi
-temp_source =         293 #Pipeline,Temperature at Source,Temperature at the source,,,,k
+temp_source =         293 #Pipeline,Temperature at Source,Temperature at the source,,,,K
 p1 =                    0 #Pipeline pressure at inlet of facility, psi
-T1 =                    0 #Pipeline temperature at inlet of facility, psi
+T1 =                    0 #Pipeline temperature at inlet of facility, K
 
 # facility
 n_comp =                0 #Facility,Number of Compressors,Number of Compressors,diml
