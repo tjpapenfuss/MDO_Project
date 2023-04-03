@@ -1,0 +1,27 @@
+This is assignment #2 for MDO 16.888. 
+
+For a demo of how to use GitHub, go here: https://gist.github.com/brandon1024/14b5f9fcfd982658d01811ee3045ff1e
+
+For a demo of git with VSCode, go here: https://www.jcchouinard.com/install-git-in-vscode/#:~:text=Enable%20Git%20in%20VS%20Code,-To%20enable%20Git&text=Go%20to%20File%20%3E%20Preferences,that%20the%20box%20is%20ticked 
+
+To download GIT: https://git-scm.com/downloads/
+To download Python3: 
+
+Add VSCode Python extension, if you have questions: https://code.visualstudio.com/docs/python/python-tutorial#_macos
+
+
+For the context of this work. The professors recommend
+1. This article for comparing optimization methods: http://ab-initio.mit.edu/wiki/index.php/NLopt_Algorithms
+2. This is autograd...not sure at this point if this has relevance: https://autograd.readthedocs.io/en/latest/ and also autodiff: https://www.autodiff.org/?module=Introduction 
+    a. Autograd appears to be a computation engine. See here for usage: https://autograd.readthedocs.io/en/latest/usage.html
+    b. autodiff is a differentiation software. It will obtain derivatives for users. 
+
+Below I will talk a bit about NLopt:
+First to install: pip install nlopt
+
+I started out with adding a sample file from NLOpt's examples. nlopt_ex.py
+I also have a file nlopt_hwproblem2.py that attempts to solve problem 2 from the homework. 
+
+So far, the homework is proving a bit more difficult than I would have liked. 
+
+Additional update on comments
