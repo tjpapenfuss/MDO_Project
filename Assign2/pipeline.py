@@ -14,8 +14,9 @@ def pipes_out(mass_dot, press_source, p_d, p_l):#, n_pc):
     #kg per mol
     mol_mass_co2 = variables.M_co2 / 1000
 
-    #pressure to pascals 
-    press = press_source * 6894.76
+    #convert pressure to pascals 
+    press = press_source * 1000
+    #press = press_source * 6894.76
 
     #temp at source​
     temp = variables.temp_source
