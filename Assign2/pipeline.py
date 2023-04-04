@@ -9,7 +9,7 @@ import math
 import variables
 
 # function definition
-def pipes_out(mass_dot, press_source, p_d, p_l):#, n_pc):
+def pipes_out(mass_dot, press_source, p_d, p_l, temp_facilities):#, n_pc):
 
     #kg per mol
     mol_mass_co2 = variables.M_co2 / 1000
@@ -19,7 +19,7 @@ def pipes_out(mass_dot, press_source, p_d, p_l):#, n_pc):
     #press = press_source * 6894.76
 
     #temp at source​
-    temp = variables.temp_source
+    temp = temp_facilities
 
     #rho_new is in kg/m3
     rho_new = mol_mass_co2 * press / (8.3145 * temp )
@@ -151,4 +151,4 @@ def pipes_out(mass_dot, press_source, p_d, p_l):#, n_pc):
     return press_i, vel_i, temp_i, CO2_emit_d, comp_capex_d, comp_opex_d
 
 #used for testing
-pipes_out(15, 150, 12/12, 55000)
+pipes_out(15, 150, 12/12, 55000,293)

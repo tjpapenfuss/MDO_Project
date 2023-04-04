@@ -231,7 +231,7 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
     pipes_press_out, pipes_vel_out, pipes_temp_out, CO2_emit_pipes, comp_capex_pipes, comp_opex_pipes = pipes.pipes_out(mass_flow_rate, 
                                                                                                 p15, 
                                                                                                 diameter_inches, 
-                                                                                                pipeline_length)
+                                                                                                pipeline_length, T15)
 
     ##CO2 generated----------------------------------------------------------------------------------##
     tot_co2_gen = facilities.co2_gen(CO2_emit_pipes,CO2_emit_12,CO2_emit_23,CO2_emit_34,CO2_emit_45,CO2_emit_56,CO2_emit_67,CO2_emit_78,CO2_emit_910,CO2_emit_1011,CO2_emit_1112,CO2_emit_1213,CO2_emit_1314,CO2_emit_1415)
