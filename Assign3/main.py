@@ -156,6 +156,7 @@ def experiment(input_tuple):
     print("The Value of CAPEX_total is: " + str(CAPEX_total))
     print("The Value of OPEX_total is: " + str(OPEX_total))
     print("The Value of CAPEX_pipeline is: " + str(CAPEX_pipeline))
+    # We need to make this negative so we can minimize it.
     return -NPV
 
 
