@@ -18,9 +18,18 @@ import wells as wells
 import pandas as pd
 
 
-def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_rate, pipeline_diameter, 
-                pipeline_length, num_compressors, num_condensers, comp_out_press, p2,p4,p6,p8,p10,p12):
-    
+def experiment(input_tuple):
+    num_wells = input_tuple[0]
+    num_connections = input_tuple[1]
+    mass_flow_rate = input_tuple[2]
+    pipeline_diameter = input_tuple[3]
+    pipeline_length = input_tuple[4]
+    p2 = input_tuple[5]
+    p4 = input_tuple[6]
+    p6 = input_tuple[7]
+    p8 = input_tuple[8]
+    p10 = input_tuple[9]
+    p12 = input_tuple[10]
     
     # ------------------------------------------------------------------------------------------------------------------ #
     # Module name: Pipeline
@@ -149,39 +158,7 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
     print("The Value of CAPEX_total is: " + str(CAPEX_total))
     print("The Value of OPEX_total is: " + str(OPEX_total))
     print("The Value of CAPEX_pipeline is: " + str(CAPEX_pipeline))
-    return NPV, mtot, CAPEX_total
+    return -NPV#, mtot, CAPEX_total
 
 
 
-# TO DO: Add in the DOE generation functionality. 
-imported_df = pd.read_csv("./file_import_and_graph/DOE_tanner.csv", index_col=0)
-npv_array = []
-mtot_array = []
-capex_array = []
-for index, row in imported_df.iterrows():
-    # Variable initialization from the DOE. 
-    
-    NPV,mtot,CAPEX_total = experiment(imported_df.loc[index]["Injection Tubing Diameter"],
-                        imported_df.loc[index]["Number of Wells"],
-                        imported_df.loc[index]["Number of Connections"],
-                        imported_df.loc[index]["Mass Flow Rate"],
-                        imported_df.loc[index]["Pipeline Diameter"],
-                        imported_df.loc[index]["Pipeline Length"],
-                        imported_df.loc[index]["Number of Compressors"],
-                        imported_df.loc[index]["Number of Condensers"],
-                        imported_df.loc[index]["Compressor Outlet Pressure"],
-                        imported_df.loc[index]["p2"],
-                        imported_df.loc[index]["p4"],
-                        imported_df.loc[index]["p6"],
-                        imported_df.loc[index]["p8"],
-                        imported_df.loc[index]["p10"],
-                        imported_df.loc[index]["p12"])
-    #Net_Present_Value_Array = [NPV, NPV]
-    npv_array.append(NPV)
-    mtot_array.append(mtot/1000/1000000)
-    capex_array.append(CAPEX_total)
-    #print(imported_df)
-imported_df["NPV"] = npv_array
-imported_df["mtot"] = mtot_array
-imported_df["CAPEX_total"] = capex_array
-imported_df.to_csv("final_df.csv")
