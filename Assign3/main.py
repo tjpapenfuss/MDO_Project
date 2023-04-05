@@ -18,22 +18,19 @@ import wells as wells
 import pandas as pd
 
 
-def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_rate, pipeline_diameter, 
-                pipeline_length, num_compressors, num_condensers, comp_out_press, p2,p4,p6,p8,p10,p12):
+def experiment(input_tuple):
+    num_wells = input_tuple[0]
+    num_connections = input_tuple[1]
+    mass_flow_rate = input_tuple[2]
+    pipeline_diameter = input_tuple[3]
+    pipeline_length = input_tuple[4]
+    p2 = input_tuple[5]
+    p4 = input_tuple[6]
+    p6 = input_tuple[7]
+    p8 = input_tuple[8]
+    p10 = input_tuple[9]
+    p12 = input_tuple[10]
     
-    
-    # ------------------------------------------------------------------------------------------------------------------ #
-    # Module name: Pipeline
-    # Required inputs:  mass_dot, press_source, p_d, p_l, n_pc (all units are SI (ft, lbsf, lbsm, PSI))
-    # Outputs: press_i (kPa), vel_i (m/s), temp_i (K), CO2_emit_d, comp_capex_d, comp_opex_d
-    # ------------------------------------------------------------------------------------------------------------------ #
-    diameter_inches = pipeline_diameter / 12
-    pipes_press_out, pipes_vel_out, pipes_temp_out, CO2_emit_pipes, comp_capex_pipes, comp_opex_pipes = pipes.pipes_out(mass_flow_rate, 
-                                                                                                variables.press_source, 
-                                                                                                diameter_inches, 
-                                                                                                pipeline_length)
-
-
     # ------------------------------------------------------------------------------------------------------------------ #
     # Module name: Facilities
     # Required inputs: m_dot, pi, Ti, 
@@ -42,9 +39,9 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
 
     ## 12 Compressor ------------------------------------------------------------------------------##
     #press_out = 345 
-    press_out = pipes_press_out# at or below 350 kPa
+    press_out = variables.press_source# at or below 350 kPa
     p2 = press_out #kPa
-    test_temp_out = pipes_temp_out # 300
+    test_temp_out = variables.temp_source # 300
     m_dot = mass_flow_rate
     p2,T2,W12,CO2_emit_12,comp_capex_12,comp_om_12,comp_opex_12,m_dot,mtot = facilities.work_comp(press_out, p2, m_dot, test_temp_out)
 
@@ -101,6 +98,17 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
     T15 = variables.T_out_hx+273
     p15,T15,Q1415,Q_cool_1415,CO2_emit_1415,hx_capex_1415,hx_opexelec_1415,hx_opref_1415,hx_opwat_1415,hx_opex_1415 = facilities.heat_hx(p14,T14,T15,m_dot)
 
+    # ------------------------------------------------------------------------------------------------------------------ #
+    # Module name: Pipeline
+    # Required inputs:  mass_dot, press_source, p_d, p_l, n_pc (all units are SI (ft, lbsf, lbsm, PSI))
+    # Outputs: press_i (kPa), vel_i (m/s), temp_i (K), CO2_emit_d, comp_capex_d, comp_opex_d
+    # ------------------------------------------------------------------------------------------------------------------ #
+
+    diameter_inches = pipeline_diameter / 12
+    pipes_press_out, pipes_vel_out, pipes_temp_out, CO2_emit_pipes, comp_capex_pipes, comp_opex_pipes = pipes.pipes_out(mass_flow_rate, 
+                                                                                                p15, 
+                                                                                                diameter_inches, 
+                                                                                                pipeline_length, T15)
 
     ##CO2 generated----------------------------------------------------------------------------------##
     tot_co2_gen = facilities.co2_gen(CO2_emit_pipes,CO2_emit_12,CO2_emit_23,CO2_emit_34,CO2_emit_45,CO2_emit_56,CO2_emit_67,CO2_emit_78,CO2_emit_910,CO2_emit_1011,CO2_emit_1112,CO2_emit_1213,CO2_emit_1314,CO2_emit_1415)
@@ -120,7 +128,7 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
     # Required inputs: avg_vol, Pwh
     # Outputs: p_wf_t
     # ------------------------------------------------------------------------------------------------------------------ #
-    pressure_wellhead = p15 / 6.89476
+    pressure_wellhead = pipes_press_out / 6.89476
     mass_flow_rate_wells = (mass_flow_rate * 2.2) / num_wells
     p_wf_t = wells.wells(mass_flow_rate_wells, pressure_wellhead)
     print("The Value of p_wf_t wellbore injection pressure is: " + str(p_wf_t))
@@ -133,12 +141,11 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
     q_inj = sub.subsurface(p_wf_t)
     print("The Value of q_inj injection volume is: " + str(q_inj))
 
-    # ------------------------------------------------------------------------------------------------------------------ #
-    # Module name: Finance
-    # Required inputs: p_d, p_l, q_inj, n_wells
-    # Outputs: NPV
+
+    #Module name: Finance
+    #Required inputs: p_d, p_l, q_inj, n_wells
+    #Outputs: NPV
     # q_inj=50                #q_inj should be an output of a subsurface function, so delete this once it's available
-    # ------------------------------------------------------------------------------------------------------------------ #
     q_inj_finance = q_inj / 1000 # Convert from scf to mcf
     revenue = finance.revenue_func(q_inj_finance, variables.n_wells) 
     CAPEX_total, CAPEX_pipeline, CAPEX_site = finance.CAPEX_func(variables.p_l, variables.p_d, variables.n_wells, num_connections, CAPEX_facilities)
@@ -149,39 +156,8 @@ def experiment(injection_tubing_diameter, num_wells, num_connections, mass_flow_
     print("The Value of CAPEX_total is: " + str(CAPEX_total))
     print("The Value of OPEX_total is: " + str(OPEX_total))
     print("The Value of CAPEX_pipeline is: " + str(CAPEX_pipeline))
-    return NPV, mtot, CAPEX_total
+    # We need to make this negative so we can minimize it.
+    return -NPV
 
 
 
-# TO DO: Add in the DOE generation functionality. 
-imported_df = pd.read_csv("./file_import_and_graph/DOE_tanner.csv", index_col=0)
-npv_array = []
-mtot_array = []
-capex_array = []
-for index, row in imported_df.iterrows():
-    # Variable initialization from the DOE. 
-    
-    NPV,mtot,CAPEX_total = experiment(imported_df.loc[index]["Injection Tubing Diameter"],
-                        imported_df.loc[index]["Number of Wells"],
-                        imported_df.loc[index]["Number of Connections"],
-                        imported_df.loc[index]["Mass Flow Rate"],
-                        imported_df.loc[index]["Pipeline Diameter"],
-                        imported_df.loc[index]["Pipeline Length"],
-                        imported_df.loc[index]["Number of Compressors"],
-                        imported_df.loc[index]["Number of Condensers"],
-                        imported_df.loc[index]["Compressor Outlet Pressure"],
-                        imported_df.loc[index]["p2"],
-                        imported_df.loc[index]["p4"],
-                        imported_df.loc[index]["p6"],
-                        imported_df.loc[index]["p8"],
-                        imported_df.loc[index]["p10"],
-                        imported_df.loc[index]["p12"])
-    #Net_Present_Value_Array = [NPV, NPV]
-    npv_array.append(NPV)
-    mtot_array.append(mtot/1000/1000000)
-    capex_array.append(CAPEX_total)
-    #print(imported_df)
-imported_df["NPV"] = npv_array
-imported_df["mtot"] = mtot_array
-imported_df["CAPEX_total"] = capex_array
-imported_df.to_csv("final_df.csv")
