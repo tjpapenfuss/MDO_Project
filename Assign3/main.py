@@ -32,18 +32,6 @@ def experiment(input_tuple):
     p12 = input_tuple[10]
     
     # ------------------------------------------------------------------------------------------------------------------ #
-    # Module name: Pipeline
-    # Required inputs:  mass_dot, press_source, p_d, p_l, n_pc (all units are SI (ft, lbsf, lbsm, PSI))
-    # Outputs: press_i (kPa), vel_i (m/s), temp_i (K), CO2_emit_d, comp_capex_d, comp_opex_d
-    # ------------------------------------------------------------------------------------------------------------------ #
-    diameter_inches = pipeline_diameter / 12
-    pipes_press_out, pipes_vel_out, pipes_temp_out, CO2_emit_pipes, comp_capex_pipes, comp_opex_pipes = pipes.pipes_out(mass_flow_rate, 
-                                                                                                variables.press_source, 
-                                                                                                diameter_inches, 
-                                                                                                pipeline_length)
-
-
-    # ------------------------------------------------------------------------------------------------------------------ #
     # Module name: Facilities
     # Required inputs: m_dot, pi, Ti, 
     # Outputs: po,To, 
@@ -51,9 +39,9 @@ def experiment(input_tuple):
 
     ## 12 Compressor ------------------------------------------------------------------------------##
     #press_out = 345 
-    press_out = pipes_press_out# at or below 350 kPa
+    press_out = variables.press_source# at or below 350 kPa
     p2 = press_out #kPa
-    test_temp_out = pipes_temp_out # 300
+    test_temp_out = variables.temp_source # 300
     m_dot = mass_flow_rate
     p2,T2,W12,CO2_emit_12,comp_capex_12,comp_om_12,comp_opex_12,m_dot,mtot = facilities.work_comp(press_out, p2, m_dot, test_temp_out)
 
@@ -110,6 +98,17 @@ def experiment(input_tuple):
     T15 = variables.T_out_hx+273
     p15,T15,Q1415,Q_cool_1415,CO2_emit_1415,hx_capex_1415,hx_opexelec_1415,hx_opref_1415,hx_opwat_1415,hx_opex_1415 = facilities.heat_hx(p14,T14,T15,m_dot)
 
+    # ------------------------------------------------------------------------------------------------------------------ #
+    # Module name: Pipeline
+    # Required inputs:  mass_dot, press_source, p_d, p_l, n_pc (all units are SI (ft, lbsf, lbsm, PSI))
+    # Outputs: press_i (kPa), vel_i (m/s), temp_i (K), CO2_emit_d, comp_capex_d, comp_opex_d
+    # ------------------------------------------------------------------------------------------------------------------ #
+
+    diameter_inches = pipeline_diameter / 12
+    pipes_press_out, pipes_vel_out, pipes_temp_out, CO2_emit_pipes, comp_capex_pipes, comp_opex_pipes = pipes.pipes_out(mass_flow_rate, 
+                                                                                                p15, 
+                                                                                                diameter_inches, 
+                                                                                                pipeline_length, T15)
 
     ##CO2 generated----------------------------------------------------------------------------------##
     tot_co2_gen = facilities.co2_gen(CO2_emit_pipes,CO2_emit_12,CO2_emit_23,CO2_emit_34,CO2_emit_45,CO2_emit_56,CO2_emit_67,CO2_emit_78,CO2_emit_910,CO2_emit_1011,CO2_emit_1112,CO2_emit_1213,CO2_emit_1314,CO2_emit_1415)
@@ -129,7 +128,7 @@ def experiment(input_tuple):
     # Required inputs: avg_vol, Pwh
     # Outputs: p_wf_t
     # ------------------------------------------------------------------------------------------------------------------ #
-    pressure_wellhead = p15 / 6.89476
+    pressure_wellhead = pipes_press_out / 6.89476
     mass_flow_rate_wells = (mass_flow_rate * 2.2) / num_wells
     p_wf_t = wells.wells(mass_flow_rate_wells, pressure_wellhead)
     print("The Value of p_wf_t wellbore injection pressure is: " + str(p_wf_t))
@@ -142,12 +141,11 @@ def experiment(input_tuple):
     q_inj = sub.subsurface(p_wf_t)
     print("The Value of q_inj injection volume is: " + str(q_inj))
 
-    # ------------------------------------------------------------------------------------------------------------------ #
-    # Module name: Finance
-    # Required inputs: p_d, p_l, q_inj, n_wells
-    # Outputs: NPV
+
+    #Module name: Finance
+    #Required inputs: p_d, p_l, q_inj, n_wells
+    #Outputs: NPV
     # q_inj=50                #q_inj should be an output of a subsurface function, so delete this once it's available
-    # ------------------------------------------------------------------------------------------------------------------ #
     q_inj_finance = q_inj / 1000 # Convert from scf to mcf
     revenue = finance.revenue_func(q_inj_finance, variables.n_wells) 
     CAPEX_total, CAPEX_pipeline, CAPEX_site = finance.CAPEX_func(variables.p_l, variables.p_d, variables.n_wells, num_connections, CAPEX_facilities)
@@ -158,7 +156,7 @@ def experiment(input_tuple):
     print("The Value of CAPEX_total is: " + str(CAPEX_total))
     print("The Value of OPEX_total is: " + str(OPEX_total))
     print("The Value of CAPEX_pipeline is: " + str(CAPEX_pipeline))
-    return -NPV#, mtot, CAPEX_total
+    return -NPV
 
 
 
