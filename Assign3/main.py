@@ -21,15 +21,15 @@ import pandas as pd
 def experiment(input_tuple):
     num_wells = input_tuple[0]
     num_connections = input_tuple[1]
-    mass_flow_rate = input_tuple[2]
-    pipeline_diameter = input_tuple[3]
-    pipeline_length = input_tuple[4]
-    p2 = input_tuple[5]
-    p4 = input_tuple[6]
-    p6 = input_tuple[7]
-    p8 = input_tuple[8]
-    p10 = input_tuple[9]
-    p12 = input_tuple[10]
+    mass_flow_rate = num_connections*2
+    pipeline_diameter = input_tuple[2]
+    pipeline_length = input_tuple[3]
+    p2 = input_tuple[4]
+    p4 = input_tuple[5]
+    p6 = input_tuple[6]
+    p8 = input_tuple[7]
+    p10 = input_tuple[8]
+    p12 = input_tuple[9]
     
     # ------------------------------------------------------------------------------------------------------------------ #
     # Module name: Facilities
