@@ -1,0 +1,13 @@
+,Material,shape,minimum
+0,Steel,Square,684.0
+1,Aluminum,Square,243.0
+2,Titanium,Square,396.0
+3,Steel,circle,537.2123437638546
+4,Aluminum,circle,190.85175370557994
+5,Titanium,circle,311.01767270538954
+6,Steel,triangle,1628503847.769983
+7,Aluminum,triangle,5828326007.041983
+8,Titanium,triangle,79.58091015204346
+9,Steel,beam,683.9999999999999
+10,Aluminum,beam,242.99999999999994
+11,Titanium,beam,395.99999999999994
