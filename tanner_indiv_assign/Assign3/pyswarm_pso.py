@@ -19,6 +19,7 @@ def f(x):
     x2 = x[1]
     "Objective function"
     return -((1-x1-x2)*((np.sin(2*np.pi*x1))**2 + (np.sin(2*np.pi*x2))**2))
+
 xopt, fopt = pso(f, lb, ub, swarmsize=100, omega=0.5, phip=0.5, phig=0.5, maxiter=100, minstep=1e-8,
     minfunc=1e-8, debug=False)
 print(xopt, fopt)
