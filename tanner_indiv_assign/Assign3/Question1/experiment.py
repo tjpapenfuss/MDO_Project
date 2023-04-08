@@ -166,7 +166,7 @@ cons = ({'type': 'ineq', 'fun': lambda x:  x[0] / (x[1]*0.5)})
 # result = minimize(obj_fun, experiment_tuple, method='SLSQP', bounds=bnds)#, constraints=cons)
 # print(result)
 
-x0 = np.array([0.3, 0.15])     # Initial guess.
+x0 = np.array([0.003, 0.0015])     # Initial guess.
 
 df = pd.read_csv("output.csv")
 #df = pd.DataFrame
@@ -175,11 +175,13 @@ df = pd.read_csv("output.csv")
 starttime = t.time()
 lasttime = starttime
 lapnum = 1
-
+iterations=1000
+temperatue=5000
 # Material: Steel, Shape: Square
 params = (rho_material[0], yield_stress_material[0], E_material[0], 0)
 np.random.seed(555)   # Seeded to allow replication.
-res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds)
+res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds, 
+   maxiter=iterations, initial_temp=temperatue)
 
 new_row = {'Material':'Steel','shape':'Square','minimum':res["fun"],'location':res['x']}
 df.loc[len(df)] = new_row
@@ -188,7 +190,8 @@ print(res)
 # Material: Aluminum, Shape: Square
 params = (rho_material[1], yield_stress_material[1], E_material[1], 0)
 np.random.seed(555)   # Seeded to allow replication.
-res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds)
+res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds,
+    maxiter=iterations, initial_temp=temperatue)
 
 new_row = {'Material':'Aluminum','shape':'Square','minimum':res["fun"],'location':res['x']}
 df.loc[len(df)] = new_row
@@ -197,7 +200,8 @@ print(res)
 # Material: Titanium, Shape: Square
 params = (rho_material[2], yield_stress_material[2], E_material[2], 0)
 np.random.seed(555)   # Seeded to allow replication.
-res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds)
+res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds,
+    maxiter=iterations, initial_temp=temperatue)
 
 new_row = {'Material':'Titanium','shape':'Square','minimum':res["fun"],'location':res['x']}
 df.loc[len(df)] = new_row
@@ -208,7 +212,8 @@ print(res)
 # Material: Steel, Shape: circle
 params = (rho_material[0], yield_stress_material[0], E_material[0], 1)
 np.random.seed(555)   # Seeded to allow replication.
-res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds)
+res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds,
+    maxiter=iterations, initial_temp=temperatue)
 
 new_row = {'Material':'Steel','shape':'circle','minimum':res["fun"],'location':res['x']}
 df.loc[len(df)] = new_row
@@ -217,7 +222,8 @@ print(res)
 # Material: Aluminum, Shape: circle
 params = (rho_material[1], yield_stress_material[1], E_material[1], 1)
 np.random.seed(555)   # Seeded to allow replication.
-res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds)
+res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds,
+    maxiter=iterations, initial_temp=temperatue)
 
 new_row = {'Material':'Aluminum','shape':'circle','minimum':res["fun"],'location':res['x']}
 df.loc[len(df)] = new_row
@@ -226,7 +232,8 @@ print(res)
 # Material: Titanium, Shape: circle
 params = (rho_material[2], yield_stress_material[2], E_material[2], 1)
 np.random.seed(555)   # Seeded to allow replication.
-res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds)
+res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds,
+    maxiter=iterations, initial_temp=temperatue)
 
 new_row = {'Material':'Titanium','shape':'circle','minimum':res["fun"],'location':res['x']}
 df.loc[len(df)] = new_row
@@ -237,7 +244,8 @@ print(res)
 # Material: Steel, Shape: Triangle
 params = (rho_material[0], yield_stress_material[0], E_material[0], 2)
 np.random.seed(555)   # Seeded to allow replication.
-res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds)
+res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds,
+    maxiter=iterations, initial_temp=temperatue)
 
 new_row = {'Material':'Steel','shape':'triangle','minimum':res["fun"],'location':res['x']}
 df.loc[len(df)] = new_row
@@ -246,7 +254,8 @@ print(res)
 # Material: Aluminum, Shape: triangle
 params = (rho_material[1], yield_stress_material[1], E_material[1], 2)
 np.random.seed(555)   # Seeded to allow replication.
-res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds)
+res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds,
+    maxiter=iterations, initial_temp=temperatue)
 
 new_row = {'Material':'Aluminum','shape':'triangle','minimum':res["fun"],'location':res['x']}
 df.loc[len(df)] = new_row
@@ -255,7 +264,8 @@ print(res)
 # Material: Titanium, Shape: triangle
 params = (rho_material[2], yield_stress_material[2], E_material[2], 2)
 np.random.seed(555)   # Seeded to allow replication.
-res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds)
+res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds,
+    maxiter=iterations, initial_temp=temperatue)
 
 new_row = {'Material':'Titanium','shape':'triangle','minimum':res["fun"],'location':res['x']}
 df.loc[len(df)] = new_row
@@ -266,7 +276,8 @@ print(res)
 # Material: Steel, Shape: beam
 params = (rho_material[0], yield_stress_material[0], E_material[0], 3)
 np.random.seed(555)   # Seeded to allow replication.
-res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds)
+res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds,
+    maxiter=iterations, initial_temp=temperatue)
 
 new_row = {'Material':'Steel','shape':'beam','minimum':res["fun"],'location':res['x']}
 df.loc[len(df)] = new_row
@@ -275,7 +286,8 @@ print(res)
 # Material: Aluminum, Shape: beam
 params = (rho_material[1], yield_stress_material[1], E_material[1], 3)
 np.random.seed(555)   # Seeded to allow replication.
-res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds)
+res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds,
+    maxiter=iterations, initial_temp=temperatue)
 
 new_row = {'Material':'Aluminum','shape':'beam','minimum':res["fun"],'location':res['x']}
 df.loc[len(df)] = new_row
@@ -284,7 +296,8 @@ print(res)
 # Material: Titanium, Shape: beam
 params = (rho_material[2], yield_stress_material[2], E_material[2], 3)
 np.random.seed(555)   # Seeded to allow replication.
-res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds)
+res = optimize.dual_annealing(penalty_fn, x0=x0, args=params, bounds=bnds,
+    maxiter=iterations, initial_temp=temperatue)
 
 new_row = {'Material':'Titanium','shape':'beam','minimum':res["fun"],'location':res['x']}
 df.loc[len(df)] = new_row
