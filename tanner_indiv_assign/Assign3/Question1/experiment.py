@@ -147,7 +147,7 @@ def penalty_fn(guess, *params):
                     max(0,max_tip_deflection(tip_tuple)) + \
                     max(0, 0.002 - d)**2 + \
                     max(0, d-0.3)**2 + \
-                    max(0, (d/2-(t))**2) +\
+                    max(0, t-(d/2))**2 +\
                     max(0, 0.001 - t)**2)
     
 E_material = (200,75,120)
@@ -166,7 +166,7 @@ cons = ({'type': 'ineq', 'fun': lambda x:  x[0] / (x[1]*0.5)})
 # result = minimize(obj_fun, experiment_tuple, method='SLSQP', bounds=bnds)#, constraints=cons)
 # print(result)
 
-x0 = np.array([0.003, 0.0015])     # Initial guess.
+x0 = np.array([0.03, 0.015])     # Initial guess.
 
 df = pd.read_csv("output.csv")
 #df = pd.DataFrame
