@@ -51,11 +51,10 @@ cons = ({'type': 'ineq', 'fun': lambda x:  x[0] - 2})
 
 
 
-# TO DO: Add in the DOE generation functionality. 
+# Read in the DOE data. This is the initial guess for the PSO optimization
 imported_df = pd.read_csv("./file_import_and_graph/DOE_tanner.csv", index_col=0)
-npv_array = []
-mtot_array = []
-capex_array = []
+
+# Setting up the DOE tuple for the initial guess in the PSO optimization
 experiment_tuple = (imported_df.loc[0]["Number of Wells"],
                         imported_df.loc[0]["Number of Connections"],
                         # imported_df.loc[1]["Mass Flow Rate"],
@@ -67,17 +66,21 @@ experiment_tuple = (imported_df.loc[0]["Number of Wells"],
                         imported_df.loc[0]["p8"],
                         imported_df.loc[0]["p10"],
                         imported_df.loc[0]["p12"])
-print(experiment_tuple)
-#NPV,mtot,CAPEX_total = objective_function.experiment(experiment_tuple)
-NPV = objective_function.experiment(experiment_tuple)
+# print(experiment_tuple)
+# NPV,mtot,CAPEX_total = objective_function.experiment(experiment_tuple)
+# NPV = objective_function.experiment(experiment_tuple)
 
-# Minimize objective function
+# Minimize objective function using SLSQP
 result = minimize(objective_function.experiment, experiment_tuple, method='SLSQP', bounds=bnds)#, constraints=cons)
-print(result)
-xopt, fopt = pso(objective_function.experiment, lb, ub, swarmsize=100, omega=0.5, phip=0.5, phig=0.5, maxiter=100, minstep=1e-8,
-    minfunc=1e-8, debug=False)
+# print(result)
+# Minimize objective function using PSO. 
+xopt, fopt = pso(objective_function.experiment, lb, ub, swarmsize=100, omega=0.5, phip=0.5, 
+    phig=0.5, maxiter=100, minstep=1e-8, minfunc=1e-8, debug=False)
+
+#Below prints the results of the PSO and SLSQP optimization. We can then manually compare results. 
 print("PSO Optimizatoin Results:")
 print("xopt: ", xopt)
 print("fopt: ", fopt)
+
 print("SLSQP Optimization Results:")
 print(result)
