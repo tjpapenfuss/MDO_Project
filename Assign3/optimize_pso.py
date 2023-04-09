@@ -44,12 +44,7 @@ lb = [bound_num_wells[0], bound_num_connections[0], # bound_mass_flow_rate[0],
 ub = [bound_num_wells[1], bound_num_connections[1], # bound_mass_flow_rate[1],
         bound_pipeline_diameter[1], bound_pipeline_length[1], bound_p2[1],
         bound_p4[1], bound_p6[1], bound_p8[1], bound_p10[1], bound_p12[1]]
-cons = ({'type': 'ineq', 'fun': lambda x:  x[0] - 2})
-
-
-#print(result)
-
-
+# cons = ({'type': 'ineq', 'fun': lambda x:  x[0] - 2})
 
 # Read in the DOE data. This is the initial guess for the PSO optimization
 imported_df = pd.read_csv("./file_import_and_graph/DOE_tanner.csv", index_col=0)
