@@ -176,7 +176,7 @@ starttime = t.time()
 lasttime = starttime
 lapnum = 1
 iterations=1000
-temperatue=5000
+temperatue=5230
 # Material: Steel, Shape: Square
 params = (rho_material[0], yield_stress_material[0], E_material[0], 0)
 np.random.seed(555)   # Seeded to allow replication.
