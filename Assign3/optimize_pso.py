@@ -69,8 +69,8 @@ experiment_tuple = (imported_df.loc[0]["Number of Wells"],
 result = minimize(objective_function.experiment, experiment_tuple, method='SLSQP', bounds=bnds)#, constraints=cons)
 # print(result)
 # Minimize objective function using PSO. 
-xopt, fopt = pso(objective_function.experiment, lb, ub, swarmsize=100, omega=0.5, phip=0.5, 
-    phig=0.5, maxiter=100, minstep=1e-8, minfunc=1e-8, debug=False)
+xopt, fopt = pso(objective_function.experiment, lb, ub, swarmsize=1000, omega=0.5, phip=0.5, 
+    phig=0.5, maxiter=1, minstep=1e-8, minfunc=1e-8, debug=False)
 
 #Below prints the results of the PSO and SLSQP optimization. We can then manually compare results. 
 print("PSO Optimizatoin Results:")
