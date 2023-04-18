@@ -29,19 +29,20 @@ x2_bnds = (-5,5)
 starttime = t.time()
 lasttime = starttime
 # Minimize objective function
-experiment_tuple = (0,0,0)
+experiment_tuple = (-4,-4,-4)
 bnds = (x0_bnds, x1_bnds, x2_bnds)
 result = minimize(fun=fn, x0=experiment_tuple, method='SLSQP', bounds=bnds, constraints=cons)
+first_opt = round((t.time() - lasttime), 6)
 
+print("Initial optimization with the unscaled function.")
 print(result)
 
-first_opt = round((t.time() - lasttime), 2)
+print("Time for the first minimization: " + str(first_opt))
 middle_time = t.time()
-print(first_opt)
-
+# experiment_tuple = (-4,-4*0.0001,-4/1000)
 scaled_result = minimize(fun=scaled_fn, x0=experiment_tuple, method='SLSQP', bounds=bnds, constraints=cons)
+second_opt = round((t.time() - middle_time), 6)
 
-
+print("Second optimization with the scaled function.")
 print(scaled_result)
-second_opt = round((t.time() - middle_time), 2)
-print(second_opt)
+print("Time for the first minimization: " + str(second_opt))
