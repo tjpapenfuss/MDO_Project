@@ -1,8 +1,6 @@
-
 from scipy.optimize import minimize
 from pyswarm import pso
 import time as t
-
 
 def fn(tuple):
     const = constraint(tuple)
@@ -19,7 +17,6 @@ def scaled_fn(tuple):
 
 def constraint(tuple):
     return tuple[0]**2 + tuple[1]**2 + tuple[2]**2 - 1
-
 cons = ({'type': 'eq', 'fun': lambda x:  x[0]**2 + x[1]**2 + x[2]**2 - 1})
 
 x0_bnds = (-5,5)
