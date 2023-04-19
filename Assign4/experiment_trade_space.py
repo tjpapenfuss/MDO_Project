@@ -57,7 +57,7 @@ def pareto_frontier(Xs, Ys, maxX = True, maxY = True):
     return p_frontX, p_frontY
 
 # Call the pareto_frontier function with your NPV and mtot values from pythonTrade.csv.
-X_values, Y_values = pareto_frontier(NPV_array, Total_CO2_Gen, maxX = False, maxY = True)
+X_values, Y_values = pareto_frontier(NPV_array, Total_CO2_Gen, maxX = True, maxY = False)
 #print(X_values, Y_values) # Print out to pareto frontier values.
 
 ax = plt.gca()
