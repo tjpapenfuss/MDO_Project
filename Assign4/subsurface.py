@@ -16,7 +16,7 @@ def subsurface(p_wf_t):
     Re_rw = np.log(re/v.rw)
     # print(Re_rw)
     res_x = (0.703*v.perm*v.h_res*((p_wf_t**2)-(v.p_res**2)))
-    fluid_y = (t_res_K*v.visc_CO2SC*v.Z_CO2SC*(Re_rw-.075+v.skin))
+    fluid_y = (t_res_K*v.visc_CO2SC*v.Z_CO2SC*(Re_rw-0.75+v.skin))
     
     q_inj = res_x/fluid_y
 
