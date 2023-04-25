@@ -18,7 +18,7 @@ def revenue_func(q_inj, n_wells):
     m3_cf_convert = 35.315 #cf/m3
     tonne_mcf_convert = (tonne_m3_convert*m3_cf_convert)/1000 #mcf/tonne
 
-    revenue = tax_credit/tonne_mcf_convert*q_inj*n_wells*365*time
+    revenue = tax_credit/tonne_mcf_convert*q_inj*n_wells*365 #*time
     return revenue
 
 ### Capex ###
