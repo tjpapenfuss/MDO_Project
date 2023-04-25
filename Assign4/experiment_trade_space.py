@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import experiment_tanner as objective_function
 
 # Open up the Experiment DF. 
-imported_df = pd.read_csv("experiment_df.csv")
+imported_df = pd.read_csv("experiment_output_NPV.csv")
 
 # Run the experiment DOE through the experiment. This will output a DOE with 
 # NPV and total CO2 generated. 

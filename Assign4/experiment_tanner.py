@@ -16,9 +16,10 @@ import subsurface as sub
 import facilities
 import wells as wells
 import pandas as pd
-
+from csv import writer
 
 def experiment(input_tuple):
+
     num_wells = input_tuple[0]
     num_connections = input_tuple[1]
     mass_flow_rate = num_connections*2
@@ -157,5 +158,25 @@ def experiment(input_tuple):
     print("The Value of OPEX_total is: " + str(OPEX_total))
     print("The Value of CAPEX_pipeline is: " + str(CAPEX_pipeline))
     # We need to make this negative so we can minimize it.
-    return NPV, tot_co2_gen
+    
+    # List that we want to add as a new row
+    List = [num_wells, num_connections, pipeline_diameter, pipeline_length,
+    p2, p4, p6, p8, p10, p12, NPV, (tot_co2_gen/1000000)]
+    
+    # Open our existing CSV file in append mode
+    # Create a file object for this file
+    with open('experiment_output_NPV.csv', 'a') as f_object:
+    
+        # Pass this file object to csv.writer()
+        # and get a writer object
+        writer_object = writer(f_object)
+    
+        # Pass the list as an argument into
+        # the writerow()
+        writer_object.writerow(List)
+    
+        # Close the file object
+        f_object.close()
+    
+    return NPV, tot_co2_gen #
 
