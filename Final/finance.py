@@ -11,14 +11,14 @@ import variables
 def revenue_func(q_inj, n_wells):
     #variables/parameters used
     tax_credit = variables.tax_credit
-    time = variables.time
+    #time = variables.time
 
     #useful conversions: (may move this to separate file for use across model?)
     tonne_m3_convert = 556.20 #m3/tonne
     m3_cf_convert = 35.315 #cf/m3
     tonne_mcf_convert = (tonne_m3_convert*m3_cf_convert)/1000 #mcf/tonne
 
-    revenue = tax_credit/tonne_mcf_convert*q_inj*n_wells*365*time
+    revenue = tax_credit/tonne_mcf_convert*q_inj*n_wells*365
     return revenue
 
 ### Capex ###
