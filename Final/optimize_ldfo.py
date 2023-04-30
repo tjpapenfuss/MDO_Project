@@ -1,5 +1,5 @@
 import main as objective_function
-import constraints as cons
+#import constraints as cons
 import pandas as pd
 from scipy.optimize import direct, minimize, Bounds, LinearConstraint, NonlinearConstraint
 
