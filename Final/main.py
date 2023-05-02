@@ -157,7 +157,19 @@ def experiment(input_tuple):
     print("The Value of OPEX_total is: " + str(OPEX_total))
     print("The Value of CAPEX_pipeline is: " + str(CAPEX_pipeline))
     # We need to make this negative so we can minimize it.
+
+    # Adding in Constraints
+    # 1. Qinj * num_wells * time <= Qmax
+    # q_const is the q_inj constraint in scf/day converted to mcf/year * 365 days/year * time * num_wells
+    # This whole thing is devided by 19.64 to convert from mcf to tonnes. Then converted to MMT/year
+    q_constraint = (((q_inj / 1000) * 365 * num_wells * variables.time) / 19.64) / 1000000
+    if(q_constraint > variables.Q_max):
+        NPV = -1000000 + NPV
+
+    # 2. The pressure at the bottom of the well cannot exceed max inj pressure which is determined
+    # by reservoir pore pressure fracture gradient, PWH > Pwf
+    if(p_wf_t > variables.p_injmax):
+        NPV = -1000000 + NPV
+
     return -NPV
-
-
 
