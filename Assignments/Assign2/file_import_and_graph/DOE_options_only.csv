@@ -1,0 +1,4 @@
+﻿Injection Tubing Diameter,Number of Wells,Number of Connections,Mass Flow Rate,Pipeline Diameter,Pipeline Length,Number of Compressors,Number of Condensers,Compressor Outlet Pressure,p2,p4,p6,p8,p10,p12
+0.58,20,3,5,12,1000,10,6,755,900,1800,3200,4800,6000,7000
+0.4,5,1,1,20,55000,6,10,10,700,1300,2800,4400,5500,6500
+0.7,10,2,15,4,28000,1,1,1500,500,900,2300,3800,5000,6000
